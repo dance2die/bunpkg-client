@@ -35,7 +35,7 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  */
 const steps = [
   { title: "Search package", componentName: "SearchPackageStep" },
-  { title: "Select a version", componentName: "SelectVersionsStep" },
+  { title: "Select version", componentName: "SelectVersionsStep" },
   { title: "Unpkg Links", componentName: "UnpkgLinksStep" }
 ];
 
