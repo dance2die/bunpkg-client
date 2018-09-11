@@ -1,5 +1,5 @@
 import React from "react";
 
-const AppHeader = () => <header>🍔 Bunpkg 🍔</header>;
+const AppHeader = () => <header className="app-header">🍔 Bunpkg 🍔</header>;
 
 export default AppHeader;
