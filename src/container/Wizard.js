@@ -8,6 +8,25 @@ import SelectVersionsStep from "../components/SelectVersionsStep";
 import UnpkgLinksStep from "../components/UnpkgLinksStep";
 
 /**
+ * @todo Make each step clickable
+ *    Step 1 - always clickable
+ *    Step 2 - clickable if "packageName" exists
+ *    Step 3 - clickable if both "packageName" & "version" exist
+ * @todo Cache components - going back & forth loads component every time!
+ * @todo Add "copy to clipboard" in the "UnpkgLinksStep" component
+ * @todo Add Title & Footer
+ *    Add Google Font
+ *    Make the title to use the google font
+ * @todo Credit links -> Michael Jackson (unpkg) & Shubham Kanodia  (bundlePhobia)
+ *
+ *
+ * @todo Instead of a Wizard, display kind of popup CodeSandBox uses on "Add Dependency" dialog
+ *    It requires some caching strategies
+ *    1. Redis - haven't learned, yet.
+ *    2. CloudFlare API - haven't learned, yet.
+ */
+
+/**
  * Wizard steps
  * @todo Dynamically import components using import(`componentName`) later
  */
