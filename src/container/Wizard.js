@@ -38,10 +38,8 @@ class Wizard extends Component {
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
   prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
 
-  setPackageName = packageName =>
-    this.setState({ packageName }, () => this.next());
-  setVersion = version => console.log(`setVersion.version`, version);
-  // this.setState({ version }, () => console.log(`version=${version}`));
+  setPackageName = packageName => this.setState({ packageName }, this.next);
+  setVersion = version => this.setState({ version }, this.next);
 
   getContent = () => {
     const { current, packageName, version } = this.state;
