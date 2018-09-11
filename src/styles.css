@@ -41,6 +41,18 @@
     border: none;
     background-color: transparent;
   }
+  .ant-select-auto-complete.ant-select .ant-select-selection__rendered,
+  .ant-select-auto-complete.ant-select .ant-select-search--inline,
+  .ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
+    height: 1.5em;
+    text-align: center;
+  }
+
+  .ant-input {
+    font-size: 1.5em;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
 }
 
 .steps-action {
