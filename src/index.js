@@ -31,7 +31,7 @@ const Column = ({ children }) => (
 );
 
 const App = () => (
-  <Fragment>
+  <div className="app">
     <Row>
       <Column>
         <AppHeader />
@@ -49,7 +49,7 @@ const App = () => (
         <AppFooter />
       </Column>
     </Row>
-  </Fragment>
+  </div>
 );
 
 const rootElement = document.getElementById("root");

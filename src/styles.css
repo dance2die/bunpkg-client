@@ -1,11 +1,12 @@
-.App {
+.app {
   font-family: sans-serif;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .app-content {
   margin: 2em 0;
-  /* padding: 0 5em; */
   width: 100%;
 }
 
@@ -25,9 +26,9 @@
 /* https://ant.design/components/steps/  */
 .steps-content {
   margin-top: 16px;
-  border: 1px dashed #e9e9e9;
+  /* border: 1px dashed #e9e9e9;
   border-radius: 6px;
-  background-color: #fafafa;
+  background-color: #fafafa; */
   min-height: 200px;
   text-align: center;
   padding-top: 4em;
@@ -67,6 +68,10 @@
 /* .select-versions {
 } */
 .unpkg-links {
+}
+
+.ant-row {
+  width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
