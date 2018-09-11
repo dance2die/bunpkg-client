@@ -4,7 +4,7 @@ import PackageContext from "../data/PackageContext";
 import PropTypes from "prop-types";
 import { Spin } from "antd";
 
-import { buildUnpkgURL } from "../util/index";
+import { buildUnpkgURL, buildUnpkgDirectoryURL } from "../util/index";
 
 const UnpkgLink = ({ packageName, version, file }) => (
   <div>
@@ -52,6 +52,13 @@ class UnpkgLinksStep extends Component {
       <Fragment>
         <div>packageName:{packageName}</div>
         <div>version:{version}</div>
+        <div>
+          Browse files on Unpkg:
+          <a
+            target="_blank"
+            href={buildUnpkgDirectoryURL(packageName, version)}
+          >{`${packageName}@${version}`}</a>
+        </div>
         <div>{filesComponents}</div>
       </Fragment>
     );

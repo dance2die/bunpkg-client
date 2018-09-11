@@ -7,8 +7,10 @@ const getEncodePackageName = packageName =>
     ? `@${encodeURIComponent(packageName.substring(1))}`
     : encodeURIComponent(packageName);
 
-const unpkgURL = `https://unpkg.com`;
+const unpkgURLRoot = `https://unpkg.com`;
 const buildUnpkgURL = (packageName, version, file) =>
-  urljoin(unpkgURL, `${packageName}@${version}`, file);
+  urljoin(unpkgURLRoot, `${packageName}@${version}`, file);
+const buildUnpkgDirectoryURL = (packageName, version) =>
+  urljoin(unpkgURLRoot, `${packageName}@${version}/`);
 
-export { getEncodePackageName, buildUnpkgURL };
+export { getEncodePackageName, buildUnpkgURL, buildUnpkgDirectoryURL };

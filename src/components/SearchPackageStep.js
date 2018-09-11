@@ -49,7 +49,7 @@ class SearchPackageStep extends Component {
             style={{ width: "75vw" }}
             onSelect={setPackageName}
             onSearch={this.onSearch}
-            placeholder="Search Package"
+            placeholder="Search NPM Package"
             optionLabelProp="value"
           >
             <Input suffix={<Icon type="search" />} />
