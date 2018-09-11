@@ -12,8 +12,8 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  *    Step 1 - always clickable
  *    Step 2 - clickable if "packageName" exists
  *    Step 3 - clickable if both "packageName" & "version" exist
- * @todo Add "copy to clipboard" in the "UnpkgLinksStep" component
- * @todo Add link to "bundlephobia" to check file size
+ * ✅ Add "copy to clipboard" in the "UnpkgLinksStep" component
+ * ✅ Add link to "bundlephobia" to check file size
  * @todo Add Title & Footer
  *    Add Google Font
  *    Make the title to use the google font
@@ -63,8 +63,6 @@ class Wizard extends Component {
 
   getContent = () => {
     const { current, packageName, version } = this.state;
-    // // prettier-ignore
-    // console.log(`getContent current, packageName, version`, current, packageName, version);
 
     switch (current) {
       default:
@@ -108,7 +106,6 @@ class Wizard extends Component {
             />
           ))}
         </Steps>
-        {/*<div className="steps-content">{components[current]}</div>*/}
         <div className="steps-content">{this.getContent()}</div>
         <div className="steps-action">
           {current < steps.length - 1 && (
