@@ -5,7 +5,7 @@
 
 .app-content {
   margin: 2em 0;
-  padding: 0 5em;
+  /* padding: 0 5em; */
   width: 100%;
 }
 
@@ -33,26 +33,11 @@
   background-color: #fafafa;
   min-height: 200px;
   text-align: center;
-  padding-top: 80px;
+  padding-top: 4em;
 }
 
-@media only screen and (max-width: 600px) {
-  .steps-content {
-    border: none;
-    background-color: transparent;
-  }
-  .ant-select-auto-complete.ant-select .ant-select-selection__rendered,
-  .ant-select-auto-complete.ant-select .ant-select-search--inline,
-  .ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
-    height: 1.5em;
-    text-align: center;
-  }
-
-  .ant-input {
-    font-size: 1.5em;
-    padding-bottom: 1rem;
-    text-align: center;
-  }
+.steps-content a {
+  padding-left: 0.3rem;
 }
 
 .steps-action {
@@ -78,4 +63,35 @@
 
 .result-list {
   margin-bottom: 2.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .steps-content {
+    border: none;
+    background-color: transparent;
+  }
+  .ant-select-auto-complete.ant-select .ant-select-selection__rendered,
+  .ant-select-auto-complete.ant-select .ant-select-search--inline,
+  .ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
+    height: 1.5em;
+    text-align: center;
+  }
+
+  .ant-input {
+    font-size: 1.5em;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  .steps-content {
+    padding-top: 0;
+  }
+
+  .ant-list-split {
+    margin: 0;
+    width: 100%;
+  }
+  .search-autocomplete {
+    padding-top: 2rem;
+  }
 }

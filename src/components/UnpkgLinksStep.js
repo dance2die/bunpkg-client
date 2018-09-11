@@ -105,19 +105,19 @@ class UnpkgLinksStep extends Component {
       <Fragment>
         <header>
           <div>
-            Browse all files on Unpkg:
+            Browse all on Unpkg
             <a
               target="_blank"
               href={buildUnpkgDirectoryURL(packageName, version)}
             >{`${packageName}@${version}`}</a>
           </div>
           <div>
-            Bundle Cost
+            Bundle Cost on
             <a
               target="_blank"
               href={buildBundlePhobiaURL(packageName, version)}
             >
-              on BundlePhobia
+              BundlePhobia
             </a>
           </div>
         </header>

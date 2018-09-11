@@ -1,7 +1,7 @@
 import React, { Component, Fragment, createRef } from "react";
 import ReactDOM from "react-dom";
 import AppHeader from "./components/AppHeader";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Row, Col } from "antd";
 
 import Wizard from "./container/Wizard";
 import AppFooter from "./components/AppFooter";
@@ -13,11 +13,23 @@ import "./styles.css";
 
 const App = () => (
   <Fragment>
-    <AppHeader />
-    <Content className="app-content">
-      <Wizard />
-    </Content>
-    <AppFooter />
+    <Row>
+      <Col span={20} offset={2}>
+        <AppHeader />
+      </Col>
+    </Row>
+    <Row>
+      <Col span={20} offset={2}>
+        <Content className="app-content">
+          <Wizard />
+        </Content>
+      </Col>
+    </Row>
+    <Row>
+      <Col span={20} offset={2}>
+        <AppFooter />
+      </Col>
+    </Row>
   </Fragment>
 );
 
