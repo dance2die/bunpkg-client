@@ -47,7 +47,6 @@ class SearchPackageStep extends Component {
           <AutoComplete
             className="search-autocomplete"
             dataSource={suggestions.map(renderOption)}
-            style={{ width: "75vw" }}
             onSelect={setPackageName}
             onSearch={this.onSearch}
             placeholder="find package"

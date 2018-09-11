@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { List, Spin, Avatar, Checkbox, Icon } from "antd";
+import React, { Component } from "react";
+import { List, Spin, Checkbox, Icon } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 
@@ -54,13 +54,7 @@ class SelectVersionsStep extends Component {
     const { stableVersionsOnly, isLoadingVersions } = this.state;
 
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignContent: "center"
-        }}
-      >
+      <div className="select-versions">
         <Checkbox
           onChange={this.onStableVersionsOnlyChange}
           checked={stableVersionsOnly}

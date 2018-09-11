@@ -52,11 +52,11 @@ class UnpkgLinksStep extends Component {
         actions={[
           <CopyButton
             clipboardText={buildUnpkgScript(packageName, version, file)}
-            buttonText="Copy Script Tag"
+            buttonText="Copy Script"
           />,
           <CopyButton
             clipboardText={buildUnpkgURL(packageName, version, file)}
-            buttonText="Copy Unpkg Link"
+            buttonText="Copy Unpkg"
           />
         ]}
       >
@@ -102,7 +102,7 @@ class UnpkgLinksStep extends Component {
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
     return (
-      <Fragment>
+      <div className="unpkg-links">
         <header>
           <div>
             Browse all on Unpkg
@@ -124,7 +124,7 @@ class UnpkgLinksStep extends Component {
         <section>
           <div>{this.renderFiles()}</div>
         </section>
-      </Fragment>
+      </div>
     );
   }
 }
