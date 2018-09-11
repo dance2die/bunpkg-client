@@ -16,11 +16,13 @@
 .ant-select-auto-complete.ant-select .ant-select-search--inline,
 .ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
   height: 2.5em;
+  text-align: center;
 }
 
 .ant-input {
   font-size: 2em;
   padding-bottom: 1rem;
+  text-align: center;
 }
 
 /* https://ant.design/components/steps/  */
@@ -32,6 +34,13 @@
   min-height: 200px;
   text-align: center;
   padding-top: 80px;
+}
+
+@media only screen and (max-width: 600px) {
+  .steps-content {
+    border: none;
+    background-color: transparent;
+  }
 }
 
 .steps-action {
