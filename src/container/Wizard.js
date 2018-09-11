@@ -16,13 +16,14 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  *    Step 3 - clickable if both "packageName" & "version" exist
  * ✅ Add "copy to clipboard" in the "UnpkgLinksStep" component
  * ✅ Add link to "bundlephobia" to check file size
+ * @todo Add event handler on "magnifier"
  * @todo Add Title & Footer
  *    Add Google Font
  *    Make the title to use the google font
  * @todo Credit links -> Michael Jackson (unpkg) & Shubham Kanodia  (bundlePhobia)
  * @todo Add Google Analytics
  *
- * @todo Cache components - going back & forth loads component every time!
+ * ✅ Cache components - going back & forth loads component every time!
  * @todo Instead of a Wizard, display kind of popup CodeSandBox uses on "Add Dependency" dialog
  *    It requires some caching strategies
  *    1. Redis - haven't learned, yet.
@@ -54,7 +55,8 @@ class Wizard extends Component {
   state = {
     current: wizardStep.searchPackage,
     packageName: "",
-    version: ""
+    version: "",
+    components: []
   };
 
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
@@ -64,16 +66,32 @@ class Wizard extends Component {
   setVersion = version => this.setState({ version }, this.next);
 
   getContent = () => {
-    const { current, packageName, version } = this.state;
+    const { current, packageName, version, components } = this.state;
+
+    if (components[current]) {
+      return components[current];
+    }
 
     switch (current) {
       default:
-        return <SearchPackageStep />;
+        if (!components[wizardStep.searchPackage])
+          components[wizardStep.searchPackage] = <SearchPackageStep />;
+        break;
       case wizardStep.selectVersions:
-        return <SelectVersionsStep packageName={packageName} />;
+        if (!components[current])
+          components[current] = (
+            <SelectVersionsStep packageName={packageName} />
+          );
+        break;
       case wizardStep.unpkgLinks:
-        return <UnpkgLinksStep packageName={packageName} version={version} />;
+        if (!components[current])
+          components[current] = (
+            <UnpkgLinksStep packageName={packageName} version={version} />
+          );
+        break;
     }
+    this.setState({ components });
+    return components[current];
   };
 
   onStepClick = current => {
@@ -86,7 +104,7 @@ class Wizard extends Component {
     )
       return;
 
-    this.setState({ current }, () => console.log(`onStepClick`, current));
+    this.setState({ current });
   };
 
   render() {
