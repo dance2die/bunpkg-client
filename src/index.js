@@ -1,16 +1,12 @@
-import React from "react";
+import React, { Component, Fragment, createRef } from "react";
 import ReactDOM from "react-dom";
+import Wizard from "./container/Wizard";
 
+import "antd/dist/antd.css";
 import "./styles.css";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
-  );
-}
+// Let's style the container later...
+const App = () => <Wizard />;
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
