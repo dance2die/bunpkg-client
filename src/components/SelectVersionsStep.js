@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { List, Spin, Avatar, Checkbox } from "antd";
+import { List, Spin, Avatar, Checkbox, Icon } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 
@@ -12,14 +12,8 @@ const renderListItem = version => {
     <PackageContext.Consumer>
       {({ setVersion }) => (
         <List.Item key={version} onClick={() => setVersion(version)}>
-          <List.Item.Meta
-            avatar={
-              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-            }
-            title={<strong>{version}</strong>}
-            description={version}
-          />
-          <div>{version}</div>
+          <List.Item.Meta title={<strong>{version}</strong>} />
+          <Icon type="select" theme="outlined" />
         </List.Item>
       )}
     </PackageContext.Consumer>
@@ -60,25 +54,27 @@ class SelectVersionsStep extends Component {
     const { stableVersionsOnly, isLoadingVersions } = this.state;
 
     return (
-      <Fragment>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center"
+        }}
+      >
         <Checkbox
           onChange={this.onStableVersionsOnlyChange}
           checked={stableVersionsOnly}
         >
           <label>Stable Versions Only</label>
         </Checkbox>
-        <List
-          style={{ width: "75vw" }}
-          dataSource={this.filteredVersions()}
-          renderItem={renderListItem}
-        >
+        <List dataSource={this.filteredVersions()} renderItem={renderListItem}>
           {isLoadingVersions && (
             <div className="demo-loading-container">
               <Spin />
             </div>
           )}
         </List>
-      </Fragment>
+      </div>
     );
   }
 }

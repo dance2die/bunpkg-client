@@ -45,11 +45,12 @@ class SearchPackageStep extends Component {
       <PackageContext.Consumer>
         {({ setPackageName }) => (
           <AutoComplete
+            className="search-autocomplete"
             dataSource={suggestions.map(renderOption)}
             style={{ width: "75vw" }}
             onSelect={setPackageName}
             onSearch={this.onSearch}
-            placeholder="Search NPM Package"
+            placeholder="find package"
             optionLabelProp="value"
           >
             <Input suffix={<Icon type="search" />} />

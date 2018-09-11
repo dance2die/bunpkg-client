@@ -3,6 +3,26 @@
   text-align: center;
 }
 
+.app-content {
+  margin: 2em 0;
+  padding: 0 5em;
+  width: 100%;
+}
+
+.search-autocomplete {
+  font-size: 2em;
+}
+.ant-select-auto-complete.ant-select .ant-select-selection__rendered,
+.ant-select-auto-complete.ant-select .ant-select-search--inline,
+.ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
+  height: 2.5em;
+}
+
+.ant-input {
+  font-size: 2em;
+  padding-bottom: 1rem;
+}
+
 /* https://ant.design/components/steps/  */
 .steps-content {
   margin-top: 16px;
@@ -16,4 +36,25 @@
 
 .steps-action {
   margin-top: 24px;
+}
+
+.ant-list-split {
+  margin: 2.5em auto;
+  width: 75vw;
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ant-list-item {
+  padding: 12px 2em;
+}
+
+.ant-list-item:hover {
+  background-color: papayawhip;
+  cursor: pointer;
+}
+
+.result-list {
+  margin-bottom: 2.5em;
 }

@@ -13,10 +13,6 @@ import {
   isEmpty
 } from "../util/index";
 
-// message.config({
-//   top: "15vh"
-// });
-
 const CopyButton = ({ clipboardText, buttonText }) => (
   <CopyToClipboard
     text={clipboardText}
@@ -87,7 +83,7 @@ class UnpkgLinksStep extends Component {
 
     return (
       <List
-        style={{ width: "75vw" }}
+        className="result-list"
         dataSource={files}
         renderItem={this.renderListItem}
       >
