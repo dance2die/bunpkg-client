@@ -8,7 +8,7 @@ import SelectVersionsStep from "../components/SelectVersionsStep";
 import UnpkgLinksStep from "../components/UnpkgLinksStep";
 
 /**
- * @todo Make each step clickable
+ * ✅ Make each step clickable
  *    Step 1 - always clickable
  *    Step 2 - clickable if "packageName" exists
  *    Step 3 - clickable if both "packageName" & "version" exist
@@ -37,9 +37,9 @@ const steps = [
 ];
 
 const wizardStep = {
-  SearchPackage: 0,
-  SelectVersions: 1,
-  UnpkgLinks: 2
+  searchPackage: 0,
+  selectVersions: 1,
+  unpkgLinks: 2
 };
 Object.freeze(wizardStep);
 
@@ -49,7 +49,7 @@ Object.freeze(wizardStep);
  */
 class Wizard extends Component {
   state = {
-    current: wizardStep.SearchPackage,
+    current: wizardStep.searchPackage,
     packageName: "",
     version: ""
   };
@@ -68,11 +68,24 @@ class Wizard extends Component {
     switch (current) {
       default:
         return <SearchPackageStep />;
-      case wizardStep.SelectVersions:
+      case wizardStep.selectVersions:
         return <SelectVersionsStep packageName={packageName} />;
-      case wizardStep.UnpkgLinks:
+      case wizardStep.unpkgLinks:
         return <UnpkgLinksStep packageName={packageName} version={version} />;
     }
+  };
+
+  onStepClick = current => {
+    const { packageName, version } = this.state;
+
+    if (current === wizardStep.selectVersions && packageName === "") return;
+    if (
+      current === wizardStep.unpkgLinks &&
+      (packageName === "" || version === "")
+    )
+      return;
+
+    this.setState({ current }, () => console.log(`onStepClick`, current));
   };
 
   render() {
@@ -86,8 +99,12 @@ class Wizard extends Component {
         }}
       >
         <Steps current={current}>
-          {steps.map(item => (
-            <Steps.Step key={item.title} title={item.title} />
+          {steps.map((item, step) => (
+            <Steps.Step
+              key={item.title}
+              title={item.title}
+              onClick={e => this.onStepClick(step)}
+            />
           ))}
         </Steps>
         {/*<div className="steps-content">{components[current]}</div>*/}
