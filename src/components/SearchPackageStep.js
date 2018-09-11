@@ -1,15 +1,10 @@
 import React, { Component, Fragment } from "react";
-import PackageContext from "../data/PackageContext";
-import { getSuggestions } from "../data/SearchRepository";
 import { AutoComplete, Icon, Input } from "antd";
 import debounce from "tiny-debounce";
 
-// Credit Michael Jackson
-// https://github.com/unpkg/unpkg.com/blob/82d404a973cfe24a2a632859cbb6ab8958d48e9e/modules/utils/fetchNpmPackageInfo.js#L15
-const encodedPackageName = packageName =>
-  packageName.charAt(0) === "@"
-    ? `@${encodeURIComponent(packageName.substring(1))}`
-    : encodeURIComponent(packageName);
+import { getSuggestions } from "../data/SearchRepository";
+import { getEncodePackageName } from "../util/index";
+import PackageContext from "../data/PackageContext";
 
 const renderOption = suggestion => (
   <AutoComplete.Option key={suggestion.name} value={suggestion.name}>
@@ -27,7 +22,7 @@ class SearchPackageStep extends Component {
   state = SearchPackageStep.defaultState;
 
   fetchSuggestions = debounce(query => {
-    const packageName = encodedPackageName(query);
+    const packageName = getEncodePackageName(query);
 
     if (packageName === "") {
       this.setState(SearchPackageStep.defaultState);

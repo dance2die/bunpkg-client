@@ -7,6 +7,8 @@ import { createContext } from "react";
  * See {@link https://reactjs.org/docs/context.html#updating-context-from-a-nested-component|Updating Context from a Nested Component} on how it works
  */
 const PackageContext = createContext({
+  // packageName: "",
+  // version: "",
   setPackageName: name => {},
   setVersion: version => {}
 });

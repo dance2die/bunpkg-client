@@ -17,35 +17,49 @@ const steps = [
   { title: "Result", componentName: "UnpkgLinksStep" }
 ];
 
+const wizardStep = {
+  SearchPackage: 0,
+  SelectVersions: 1,
+  UnpkgLinks: 2
+};
+Object.freeze(wizardStep);
+
 /**
  * Steps required to generate Unpkdg links.
  * See {@link https://ant.design/components/steps/|Antd Steps}.
  */
 class Wizard extends Component {
   state = {
-    current: 0,
-    components: [],
+    current: wizardStep.SearchPackage,
     packageName: "",
     version: ""
   };
-
-  componentDidMount() {
-    let { components } = this.state;
-    components[0] = <SearchPackageStep />;
-    this.setState({ components });
-  }
 
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
   prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
 
   setPackageName = packageName =>
-    this.setState({ packageName }, () =>
-      console.log(`Wizard.setPackageName`, packageName)
-    );
-  setVersion = version => this.setState({ version });
+    this.setState({ packageName }, () => this.next());
+  setVersion = version => console.log(`setVersion.version`, version);
+  // this.setState({ version }, () => console.log(`version=${version}`));
+
+  getContent = () => {
+    const { current, packageName, version } = this.state;
+    // prettier-ignore
+    console.log(`getContent current, packageName, version`, current, packageName, version);
+
+    switch (current) {
+      default:
+        return <SearchPackageStep />;
+      case wizardStep.SelectVersions:
+        return <SelectVersionsStep packageName={packageName} />;
+      case wizardStep.UnpkgLinks:
+        return <SearchPackageStep />;
+    }
+  };
 
   render() {
-    const { current, packageName, version, components } = this.state;
+    const { current, packageName, components } = this.state;
 
     return (
       <PackageContext.Provider
@@ -59,7 +73,8 @@ class Wizard extends Component {
             <Steps.Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className="steps-content">{components[current]}</div>
+        {/*<div className="steps-content">{components[current]}</div>*/}
+        <div className="steps-content">{this.getContent()}</div>
         <div className="steps-action">
           {current < steps.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
