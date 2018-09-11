@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Steps, Button, message } from "antd";
 
+import PackageContext from "../data/PackageContext";
+
 import SearchPackageStep from "../components/SearchPackageStep";
 import SelectVersionsStep from "../components/SelectVersionsStep";
 import UnpkgLinksStep from "../components/UnpkgLinksStep";
@@ -22,29 +24,42 @@ const steps = [
 class Wizard extends Component {
   state = {
     current: 0,
-    step0Component: null,
-    step1Component: null,
-    step2Component: null
+    components: [],
+    packageName: "",
+    version: ""
   };
 
   componentDidMount() {
-    let { step0Component, step1Component, step2Component } = this.state;
+    let { components } = this.state;
+    components[0] = <SearchPackageStep />;
+    this.setState({ components });
   }
 
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
   prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
 
+  setPackageName = packageName =>
+    this.setState({ packageName }, () =>
+      console.log(`Wizard.setPackageName`, packageName)
+    );
+  setVersion = version => this.setState({ version });
+
   render() {
-    const { current } = this.state;
+    const { current, packageName, version, components } = this.state;
 
     return (
-      <div>
+      <PackageContext.Provider
+        value={{
+          setPackageName: this.setPackageName,
+          setVersion: this.setVersion
+        }}
+      >
         <Steps current={current}>
           {steps.map(item => (
             <Steps.Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className="steps-content">{steps[current].componentName}</div>
+        <div className="steps-content">{components[current]}</div>
         <div className="steps-action">
           {current < steps.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
@@ -65,7 +80,7 @@ class Wizard extends Component {
             </Button>
           )}
         </div>
-      </div>
+      </PackageContext.Provider>
     );
   }
 }
