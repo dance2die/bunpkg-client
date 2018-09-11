@@ -19,6 +19,35 @@
   margin-top: -0.7em;
 }
 
+.app-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.made-with {
+  font-size: 0.75rem;
+  text-decoration: underline;
+  margin-top: 1.75em;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+}
+
+.credits {
+  font-size: 0.75rem;
+}
+
+.credits ul {
+  list-style: none;
+}
+
 .app-content {
   margin: 2em 0;
   width: 100%;
