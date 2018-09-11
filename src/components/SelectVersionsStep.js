@@ -13,7 +13,7 @@ const renderListItem = version => {
       {({ setVersion }) => (
         <List.Item key={version} onClick={() => setVersion(version)}>
           <List.Item.Meta title={<strong>{version}</strong>} />
-          <Icon type="select" theme="outlined" />
+          {/*<Icon type="select" theme="outlined" />*/}
         </List.Item>
       )}
     </PackageContext.Consumer>

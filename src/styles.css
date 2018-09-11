@@ -64,8 +64,8 @@
 .search-autocomplete {
   font-size: 2em;
 }
-.select-versions {
-}
+/* .select-versions {
+} */
 .unpkg-links {
 }
 
@@ -74,7 +74,6 @@
     border: none;
     background-color: transparent;
     padding-top: 0;
-    width: 100vw;
   }
   .ant-select-auto-complete.ant-select .ant-select-selection__rendered,
   .ant-select-auto-complete.ant-select .ant-select-search--inline,
@@ -84,7 +83,9 @@
   }
 
   .ant-list-item {
-    padding: 0.2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .ant-input {
@@ -103,9 +104,14 @@
   }
 
   .select-versions {
-    width: 75%;
+    /* width: 75%; */
   }
   .select-versions ant-list {
     margin-top: 1.5em;
+  }
+  .result-list {
+    margin: 0.6rem;
+  }
+  .unpkg-links {
   }
 }
