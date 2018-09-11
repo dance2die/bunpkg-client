@@ -7,7 +7,11 @@ import { getEncodePackageName } from "../util/index";
 import PackageContext from "../data/PackageContext";
 
 const renderOption = suggestion => (
-  <AutoComplete.Option key={suggestion.name} value={suggestion.name}>
+  <AutoComplete.Option
+    className="suggestions"
+    key={suggestion.name}
+    value={suggestion.name}
+  >
     <span>{suggestion.name}</span>
     <div>{suggestion.description}</div>
   </AutoComplete.Option>

@@ -19,16 +19,12 @@
 
 .ant-input {
   font-size: 2rem;
-  /* padding-bottom: 1rem; */
   text-align: center;
 }
 
 /* https://ant.design/components/steps/  */
 .steps-content {
   margin-top: 16px;
-  /* border: 1px dashed #e9e9e9;
-  border-radius: 6px;
-  background-color: #fafafa; */
   min-height: 200px;
   text-align: center;
   padding-top: 4em;
@@ -44,7 +40,6 @@
 
 .ant-list-split {
   margin: 2.5em auto;
-  /* width: 75%; */
   height: 50vh;
   overflow: auto;
 }
@@ -64,10 +59,6 @@
 
 .search-autocomplete {
   font-size: 2rem;
-}
-/* .select-versions {
-} */
-.unpkg-links {
 }
 
 .ant-row {
@@ -93,6 +84,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .suggestions {
+    font-size: 0.7rem;
+  }
+
   .ant-row {
     width: 90%;
   }
@@ -117,7 +112,6 @@
 
   .ant-input {
     font-size: 1rem;
-    /* padding-bottom: 1rem; */
     text-align: center;
   }
 
@@ -130,15 +124,10 @@
     width: 90%;
   }
 
-  .select-versions {
-    /* width: 75%; */
-  }
   .select-versions ant-list {
     margin-top: 1.5em;
   }
   .result-list {
     margin: 0.6rem;
-  }
-  .unpkg-links {
   }
 }
