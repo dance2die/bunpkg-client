@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { List, Spin, Avatar } from "antd";
 import stable from "semver-stable";
+import PropTypes from "prop-types";
 
 import { getEncodePackageName } from "../util/index";
-import { getVersions, getPackageInfo } from "../data/SearchRepository";
+import { getVersions } from "../data/SearchRepository";
 import PackageContext from "../data/PackageContext";
 
 const renderListItem = (version, setVersion) => {
@@ -22,6 +23,10 @@ const renderListItem = (version, setVersion) => {
 };
 
 class SelectVersionsStep extends Component {
+  static propTypes = {
+    packageName: PropTypes.string.isRequired
+  };
+
   static defaultState = {
     versions: [],
     isLoadingVersions: true,

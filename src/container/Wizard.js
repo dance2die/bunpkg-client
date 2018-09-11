@@ -52,12 +52,12 @@ class Wizard extends Component {
       case wizardStep.SelectVersions:
         return <SelectVersionsStep packageName={packageName} />;
       case wizardStep.UnpkgLinks:
-        return <SearchPackageStep />;
+        return <UnpkgLinksStep packageName={packageName} version={version} />;
     }
   };
 
   render() {
-    const { current, packageName, components } = this.state;
+    const { current } = this.state;
 
     return (
       <PackageContext.Provider
