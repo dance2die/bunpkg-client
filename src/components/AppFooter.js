@@ -42,7 +42,7 @@ const Credit = () => (
 );
 
 const AppFooter = () => (
-  <header className="app-footer">
+  <footer className="app-footer">
     <div className="made-with">
       Made with <span style={{ color: "red" }}>❤</span> by{" "}
       <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
@@ -55,7 +55,7 @@ const AppFooter = () => (
     <div className="credits">
       <Credit />
     </div>
-  </header>
+  </footer>
 );
 
 export default AppFooter;
