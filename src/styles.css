@@ -74,7 +74,29 @@
   width: 100%;
 }
 
+@media only screen and (min-width: 1351px) {
+  .ant-row {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1350px) {
+  .ant-row {
+    width: 65%;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 999px) {
+  .ant-row {
+    width: 75%;
+  }
+}
+
 @media only screen and (max-width: 600px) {
+  .ant-row {
+    width: 90%;
+  }
+
   .steps-content {
     border: none;
     background-color: transparent;
