@@ -7,18 +7,22 @@ import { getEncodePackageName } from "../util/index";
 import { getVersions } from "../data/SearchRepository";
 import PackageContext from "../data/PackageContext";
 
-const renderListItem = (version, setVersion) => {
+const renderListItem = version => {
   return (
-    <List.Item key={version} onClick={() => setVersion(version)}>
-      <List.Item.Meta
-        avatar={
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-        }
-        title={<strong>{version}</strong>}
-        description={version}
-      />
-      <div>{version}</div>
-    </List.Item>
+    <PackageContext.Consumer>
+      {({ setVersion }) => (
+        <List.Item key={version} onClick={() => setVersion(version)}>
+          <List.Item.Meta
+            avatar={
+              <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            }
+            title={<strong>{version}</strong>}
+            description={version}
+          />
+          <div>{version}</div>
+        </List.Item>
+      )}
+    </PackageContext.Consumer>
   );
 };
 
@@ -56,30 +60,26 @@ class SelectVersionsStep extends Component {
     const { stableVersionsOnly, isLoadingVersions } = this.state;
 
     return (
-      <PackageContext.Consumer>
-        {({ setVersion }) => (
-          <Fragment>
-            <label>
-              <input
-                onChange={this.onStableVersionsOnlyChange}
-                checked={stableVersionsOnly}
-                type="checkbox"
-              />Stable Versions Only
-            </label>
-            <List
-              style={{ width: "75vw" }}
-              dataSource={this.filteredVersions()}
-              renderItem={version => renderListItem(version, setVersion)}
-            >
-              {isLoadingVersions && (
-                <div className="demo-loading-container">
-                  <Spin />
-                </div>
-              )}
-            </List>
-          </Fragment>
-        )}
-      </PackageContext.Consumer>
+      <Fragment>
+        <label>
+          <input
+            onChange={this.onStableVersionsOnlyChange}
+            checked={stableVersionsOnly}
+            type="checkbox"
+          />Stable Versions Only
+        </label>
+        <List
+          style={{ width: "75vw" }}
+          dataSource={this.filteredVersions()}
+          renderItem={renderListItem}
+        >
+          {isLoadingVersions && (
+            <div className="demo-loading-container">
+              <Spin />
+            </div>
+          )}
+        </List>
+      </Fragment>
     );
   }
 }
