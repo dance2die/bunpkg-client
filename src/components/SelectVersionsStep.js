@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { List, Spin, Avatar } from "antd";
+import { List, Spin, Avatar, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 
@@ -61,13 +61,12 @@ class SelectVersionsStep extends Component {
 
     return (
       <Fragment>
-        <label>
-          <input
-            onChange={this.onStableVersionsOnlyChange}
-            checked={stableVersionsOnly}
-            type="checkbox"
-          />Stable Versions Only
-        </label>
+        <Checkbox
+          onChange={this.onStableVersionsOnlyChange}
+          checked={stableVersionsOnly}
+        >
+          <label>Stable Versions Only</label>
+        </Checkbox>
         <List
           style={{ width: "75vw" }}
           dataSource={this.filteredVersions()}
