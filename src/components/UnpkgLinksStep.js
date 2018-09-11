@@ -4,7 +4,12 @@ import PackageContext from "../data/PackageContext";
 import PropTypes from "prop-types";
 import { Spin } from "antd";
 
-import { buildUnpkgURL, buildUnpkgDirectoryURL, isEmpty } from "../util/index";
+import {
+  buildUnpkgURL,
+  buildUnpkgDirectoryURL,
+  buildBundlePhobiaURL,
+  isEmpty
+} from "../util/index";
 
 const UnpkgLink = ({ packageName, version, file }) => (
   <div>
@@ -56,6 +61,12 @@ class UnpkgLinksStep extends Component {
             target="_blank"
             href={buildUnpkgDirectoryURL(packageName, version)}
           >{`${packageName}@${version}`}</a>
+        </div>
+        <div>
+          Bundle Cost
+          <a target="_blank" href={buildBundlePhobiaURL(packageName, version)}>
+            on BundlePhobia
+          </a>
         </div>
         <div>{filesComponents}</div>
       </Fragment>

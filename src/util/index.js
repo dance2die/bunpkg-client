@@ -13,6 +13,10 @@ const buildUnpkgURL = (packageName, version, file) =>
 const buildUnpkgDirectoryURL = (packageName, version) =>
   urljoin(unpkgURLRoot, `${packageName}@${version}/`);
 
+const bundlePhobiaURLRoot = `https://bundlephobia.com`;
+const buildBundlePhobiaURL = (packageName, version) =>
+  urljoin(bundlePhobiaURLRoot, `result?p=${packageName}@${version}`);
+
 /**
  * Copying and pasting from StackOverflow like a boss.
  * Didn't feel like using _.isEmpty, which is kinda big.
@@ -26,4 +30,10 @@ const isEmpty = obj => {
   return JSON.stringify(obj) === JSON.stringify({});
 };
 
-export { getEncodePackageName, buildUnpkgURL, buildUnpkgDirectoryURL, isEmpty };
+export {
+  getEncodePackageName,
+  buildUnpkgURL,
+  buildUnpkgDirectoryURL,
+  buildBundlePhobiaURL,
+  isEmpty
+};
