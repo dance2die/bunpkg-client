@@ -5,9 +5,15 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "antd": "3.9.2",
+    "axios": "0.18.0",
+    "prop-types": "15.6.2",
     "react": "16.4.2",
     "react-dom": "16.4.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "semver-sort": "0.0.4",
+    "semver-stable": "2.0.4",
+    "tiny-debounce": "0.1.1"
   },
   "devDependencies": {},
   "scripts": {
