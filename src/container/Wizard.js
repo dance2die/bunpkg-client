@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from "react";
 import { Steps, Button, message } from "antd";
+import ErrorBoundary from "react-error-boundary";
 
 import PackageContext from "../data/PackageContext";
 
+import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
 import SearchPackageStep from "../components/SearchPackageStep";
 import SelectVersionsStep from "../components/SelectVersionsStep";
 import UnpkgLinksStep from "../components/UnpkgLinksStep";
@@ -106,7 +108,11 @@ class Wizard extends Component {
             />
           ))}
         </Steps>
-        <div className="steps-content">{this.getContent()}</div>
+        <div className="steps-content">
+          <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+            {this.getContent()}
+          </ErrorBoundary>
+        </div>
         <div className="steps-action">
           {current < steps.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
