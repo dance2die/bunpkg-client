@@ -12,14 +12,15 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  *    Step 1 - always clickable
  *    Step 2 - clickable if "packageName" exists
  *    Step 3 - clickable if both "packageName" & "version" exist
- * @todo Cache components - going back & forth loads component every time!
  * @todo Add "copy to clipboard" in the "UnpkgLinksStep" component
+ * @todo Add link to "bundlephobia" to check file size
  * @todo Add Title & Footer
  *    Add Google Font
  *    Make the title to use the google font
  * @todo Credit links -> Michael Jackson (unpkg) & Shubham Kanodia  (bundlePhobia)
+ * @todo Add Google Analytics
  *
- *
+ * @todo Cache components - going back & forth loads component every time!
  * @todo Instead of a Wizard, display kind of popup CodeSandBox uses on "Add Dependency" dialog
  *    It requires some caching strategies
  *    1. Redis - haven't learned, yet.
@@ -62,8 +63,8 @@ class Wizard extends Component {
 
   getContent = () => {
     const { current, packageName, version } = this.state;
-    // prettier-ignore
-    console.log(`getContent current, packageName, version`, current, packageName, version);
+    // // prettier-ignore
+    // console.log(`getContent current, packageName, version`, current, packageName, version);
 
     switch (current) {
       default:

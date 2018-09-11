@@ -13,4 +13,17 @@ const buildUnpkgURL = (packageName, version, file) =>
 const buildUnpkgDirectoryURL = (packageName, version) =>
   urljoin(unpkgURLRoot, `${packageName}@${version}/`);
 
-export { getEncodePackageName, buildUnpkgURL, buildUnpkgDirectoryURL };
+/**
+ * Copying and pasting from StackOverflow like a boss.
+ * Didn't feel like using _.isEmpty, which is kinda big.
+ * {@link https://stackoverflow.com/a/32108184/4035}
+ */
+const isEmpty = obj => {
+  for (let prop in obj) {
+    if (obj.hasOwnProperty(prop)) return false;
+  }
+
+  return JSON.stringify(obj) === JSON.stringify({});
+};
+
+export { getEncodePackageName, buildUnpkgURL, buildUnpkgDirectoryURL, isEmpty };

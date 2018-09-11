@@ -4,7 +4,7 @@ import PackageContext from "../data/PackageContext";
 import PropTypes from "prop-types";
 import { Spin } from "antd";
 
-import { buildUnpkgURL, buildUnpkgDirectoryURL } from "../util/index";
+import { buildUnpkgURL, buildUnpkgDirectoryURL, isEmpty } from "../util/index";
 
 const UnpkgLink = ({ packageName, version, file }) => (
   <div>
@@ -28,16 +28,14 @@ class UnpkgLinksStep extends Component {
   componentDidMount() {
     const { packageName, version } = this.props;
     getPackageInfo(packageName, version).then(({ meta, files }) =>
-      this.setState({ meta, files }, () =>
-        console.log(`meta, files`, meta, files)
-      )
+      this.setState({ meta, files })
     );
   }
 
   render() {
     const { packageName, version } = this.props;
     const { meta, files } = this.state;
-    if (!meta || !files) return <Spin />;
+    if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
     const filesComponents = files.map(file => (
       <UnpkgLink
@@ -53,7 +51,7 @@ class UnpkgLinksStep extends Component {
         <div>packageName:{packageName}</div>
         <div>version:{version}</div>
         <div>
-          Browse files on Unpkg:
+          Browse all files on Unpkg:
           <a
             target="_blank"
             href={buildUnpkgDirectoryURL(packageName, version)}
