@@ -18,8 +18,8 @@
 }
 
 .ant-input {
-  font-size: 2em;
-  padding-bottom: 1rem;
+  font-size: 2rem;
+  /* padding-bottom: 1rem; */
   text-align: center;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .search-autocomplete {
-  font-size: 2em;
+  font-size: 2rem;
 }
 /* .select-versions {
 } */
@@ -105,8 +105,8 @@
   .ant-select-auto-complete.ant-select .ant-select-selection__rendered,
   .ant-select-auto-complete.ant-select .ant-select-search--inline,
   .ant-select-auto-complete.ant-select .ant-select-selection__placeholder {
-    height: 1.5em;
     text-align: center;
+    font-size: 1.3rem;
   }
 
   .ant-list-item {
@@ -116,8 +116,8 @@
   }
 
   .ant-input {
-    font-size: 1.5em;
-    padding-bottom: 1rem;
+    font-size: 1rem;
+    /* padding-bottom: 1rem; */
     text-align: center;
   }
 
