@@ -102,6 +102,7 @@ class Wizard extends Component {
         <Steps current={current}>
           {steps.map((item, step) => (
             <Steps.Step
+              className="wizard-step"
               key={item.title}
               title={item.title}
               onClick={e => this.onStepClick(step)}

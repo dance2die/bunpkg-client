@@ -96,6 +96,10 @@
   cursor: pointer;
 }
 
+.wizard-step:hover {
+  cursor: pointer;
+}
+
 .result-list {
   margin-bottom: 2.5em;
 }
