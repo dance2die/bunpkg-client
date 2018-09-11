@@ -49,7 +49,7 @@ class SearchPackageStep extends Component {
             dataSource={suggestions.map(renderOption)}
             onSelect={setPackageName}
             onSearch={this.onSearch}
-            placeholder="find package"
+            placeholder="search package"
             optionLabelProp="value"
           >
             <Input suffix={<Icon type="search" />} />

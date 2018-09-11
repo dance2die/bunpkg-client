@@ -34,9 +34,9 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  * @todo Dynamically import components using import(`componentName`) later
  */
 const steps = [
-  { title: "Search Package", componentName: "SearchPackageStep" },
-  { title: "Select Version", componentName: "SelectVersionsStep" },
-  { title: "Result", componentName: "UnpkgLinksStep" }
+  { title: "Search package", componentName: "SearchPackageStep" },
+  { title: "Select a version", componentName: "SelectVersionsStep" },
+  { title: "Unpkg Links", componentName: "UnpkgLinksStep" }
 ];
 
 const wizardStep = {
