@@ -13,7 +13,6 @@ const renderListItem = version => {
       {({ setVersion }) => (
         <List.Item key={version} onClick={() => setVersion(version)}>
           <List.Item.Meta title={<strong>{version}</strong>} />
-          {/*<Icon type="select" theme="outlined" />*/}
         </List.Item>
       )}
     </PackageContext.Consumer>
@@ -59,7 +58,7 @@ class SelectVersionsStep extends Component {
           onChange={this.onStableVersionsOnlyChange}
           checked={stableVersionsOnly}
         >
-          <label>Stable Versions Only</label>
+          Stable Versions Only
         </Checkbox>
         <List dataSource={this.filteredVersions()} renderItem={renderListItem}>
           {isLoadingVersions && (
