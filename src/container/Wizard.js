@@ -10,6 +10,7 @@ import SelectVersionsStep from "../components/SelectVersionsStep";
 import UnpkgLinksStep from "../components/UnpkgLinksStep";
 
 /**
+ * @todo Add filter in result to show only "minified" javascript files
  * ✅ Make each step clickable
  *    Step 1 - always clickable
  *    Step 2 - clickable if "packageName" exists

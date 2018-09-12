@@ -13,7 +13,10 @@ const Credit = () => (
     <div>
       <ExternalLink href="https://twitter.com/mjackson">
         Michael Jackson
-      </ExternalLink>(Unpkg &{" "}
+      </ExternalLink>(<ExternalLink href="https://unpkg.com/">
+        Unpkg
+      </ExternalLink>{" "}
+      &{" "}
       <ExternalLink href="https://reactpodcast.simplecast.fm/19">
         React Podcast Ep 19
       </ExternalLink>)
@@ -22,7 +25,9 @@ const Credit = () => (
       <ExternalLink href="https://github.com/pastelsky">
         Shubham Kanodia
       </ExternalLink>
-      (BundlePhobia)
+      (<ExternalLink href="https://bundlephobia.com/">
+        BundlePhobia
+      </ExternalLink>)
     </div>
     <div>as I learned from their open source projects</div>
   </Fragment>
