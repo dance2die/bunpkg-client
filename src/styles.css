@@ -12,10 +12,20 @@
   justify-content: center;
   margin: 5.5em 0 2.5em;
 
+  color: black;
   font-family: "Lily Script One", cursive, Roboto, sans-serif;
 }
 
+.app-header > h1:hover {
+  text-decoration: underline;
+}
+
+.app-header a {
+  color: black;
+}
+
 .app-subheader {
+  color: hsla(0, 0%, 0%, 0.75);
   margin-top: -0.7em;
 }
 
