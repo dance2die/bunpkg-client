@@ -10,23 +10,21 @@ const ExternalLink = ({ href, children }) => (
 const Credit = () => (
   <Fragment>
     Many thanks <Emoji label="Thanks">🙏</Emoji> to
-    <ul>
-      <li>
-        <ExternalLink href="https://twitter.com/mjackson">
-          Michael Jackson
-        </ExternalLink>(Unpkg &{" "}
-        <ExternalLink href="https://reactpodcast.simplecast.fm/19">
-          React Podcast Ep 19
-        </ExternalLink>)
-      </li>
-      <li>
-        <ExternalLink href="https://github.com/pastelsky">
-          Shubham Kanodia
-        </ExternalLink>
-        (BundlePhobia)
-      </li>
-      <li>as I learned from their open source projects</li>
-    </ul>
+    <div>
+      <ExternalLink href="https://twitter.com/mjackson">
+        Michael Jackson
+      </ExternalLink>(Unpkg &{" "}
+      <ExternalLink href="https://reactpodcast.simplecast.fm/19">
+        React Podcast Ep 19
+      </ExternalLink>)
+    </div>
+    <div>
+      <ExternalLink href="https://github.com/pastelsky">
+        Shubham Kanodia
+      </ExternalLink>
+      (BundlePhobia)
+    </div>
+    <div>as I learned from their open source projects</div>
   </Fragment>
 );
 
@@ -52,7 +50,7 @@ const AppFooter = () => (
       by <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
     </div>
     &mdash;
-    <div className="credits">
+    <div className="credit">
       <Credit />
     </div>
     &mdash;
