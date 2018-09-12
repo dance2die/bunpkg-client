@@ -7,21 +7,9 @@ const ExternalLink = ({ href, children }) => (
   </a>
 );
 
-const Disclaimer = () => (
-  <Fragment>
-    <strong>Disclaimer</strong>
-    <div>
-      No association with{" "}
-      <ExternalLink href="https://unpkg.com/">Unpkg</ExternalLink> or{" "}
-      <ExternalLink href="https://bundlephobia.com/">BundlePhobia</ExternalLink>
-    </div>
-    <div>I just love them</div>
-  </Fragment>
-);
-
 const Credit = () => (
   <Fragment>
-    Majority of credits go to
+    Many thanks <Emoji label="Thanks">🙏</Emoji> to
     <ul>
       <li>
         <ExternalLink href="https://twitter.com/mjackson">
@@ -42,6 +30,18 @@ const Credit = () => (
   </Fragment>
 );
 
+const SourceCode = () => (
+  <Fragment>
+    <ExternalLink href="https://github.com/dance2die/bunpkg-client">
+      bunpkg-client
+    </ExternalLink>
+    &amp;
+    <ExternalLink href="https://github.com/dance2die/bunpkg-server">
+      bunpkg-server
+    </ExternalLink>
+  </Fragment>
+);
+
 const AppFooter = () => (
   <footer className="app-footer">
     <div className="made-with">
@@ -52,12 +52,12 @@ const AppFooter = () => (
       by <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
     </div>
     &mdash;
-    <div className="disclaimer">
-      <Disclaimer />
-    </div>
-    &mdash;
     <div className="credits">
       <Credit />
+    </div>
+    &mdash;
+    <div className="source-code">
+      <SourceCode />
     </div>
   </footer>
 );

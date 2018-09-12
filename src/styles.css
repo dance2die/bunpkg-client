@@ -48,6 +48,11 @@
   list-style: none;
 }
 
+.source-code {
+  font-size: 0.75rem;
+  margin-left: 0.5em;
+}
+
 .app-content {
   margin: 2em 0;
   width: 100%;
