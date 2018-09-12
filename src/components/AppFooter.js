@@ -1,4 +1,5 @@
-import React, { Component, Fragment, createRef } from "react";
+import React, { Fragment } from "react";
+import Emoji from "./Emoji";
 
 const ExternalLink = ({ href, children }) => (
   <a href={href} target="_blank">
@@ -44,8 +45,11 @@ const Credit = () => (
 const AppFooter = () => (
   <footer className="app-footer">
     <div className="made-with">
-      Made with <span style={{ color: "red" }}>❤</span> by{" "}
-      <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
+      Made with{" "}
+      <Emoji label={"Heart"} style={{ color: "red" }}>
+        ❤
+      </Emoji>{" "}
+      by <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
     </div>
     &mdash;
     <div className="disclaimer">

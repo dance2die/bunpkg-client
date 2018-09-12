@@ -1,6 +1,6 @@
-import React, { Component, Fragment, PureComponent } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, Spin, Avatar, Button, message } from "antd";
+import { List, Spin, Button, message } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { getPackageInfo } from "../data/SearchRepository";
@@ -77,7 +77,6 @@ class UnpkgLinksStep extends Component {
   };
 
   renderFiles = () => {
-    const { packageName, version } = this.props;
     const { meta, files, isLoading } = this.state;
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 

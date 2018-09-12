@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { List, Spin, Checkbox, Icon } from "antd";
+import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 

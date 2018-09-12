@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { AutoComplete, Icon, Input } from "antd";
 import debounce from "tiny-debounce";
 
