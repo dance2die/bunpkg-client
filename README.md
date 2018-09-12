@@ -19,3 +19,4 @@ A few reasons
 * Learn how to use CloudFlare API
 * After caching works, make it work like CodeSandBox "Add Dependency" dialog box
 * Make it available offline (PWA)
+* Learn & apply Accessibility features
