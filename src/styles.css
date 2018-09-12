@@ -10,7 +10,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3.5em 0 0.5em;
+  margin: 5.5em 0 2.5em;
 
   font-family: "Lily Script One", cursive, Roboto, sans-serif;
 }
@@ -135,6 +135,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .app-header {
+    margin: 3.5em 0 0.5em;
+  }
+
   .suggestions {
     font-size: 0.7rem;
   }
