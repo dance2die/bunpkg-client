@@ -55,8 +55,7 @@ class Wizard extends Component {
   state = {
     current: wizardStep.searchPackage,
     packageName: "",
-    version: "",
-    components: []
+    version: ""
   };
 
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
@@ -66,32 +65,16 @@ class Wizard extends Component {
   setVersion = version => this.setState({ version }, this.next);
 
   getContent = () => {
-    const { current, packageName, version, components } = this.state;
-
-    if (components[current]) {
-      return components[current];
-    }
+    const { current, packageName, version } = this.state;
 
     switch (current) {
       default:
-        if (!components[wizardStep.searchPackage])
-          components[wizardStep.searchPackage] = <SearchPackageStep />;
-        break;
+        return <SearchPackageStep />;
       case wizardStep.selectVersions:
-        if (!components[current])
-          components[current] = (
-            <SelectVersionsStep packageName={packageName} />
-          );
-        break;
+        return <SelectVersionsStep packageName={packageName} />;
       case wizardStep.unpkgLinks:
-        if (!components[current])
-          components[current] = (
-            <UnpkgLinksStep packageName={packageName} version={version} />
-          );
-        break;
+        return <UnpkgLinksStep packageName={packageName} version={version} />;
     }
-    this.setState({ components });
-    return components[current];
   };
 
   onStepClick = current => {
