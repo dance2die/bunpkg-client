@@ -17,11 +17,11 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
  * ✅ Add "copy to clipboard" in the "UnpkgLinksStep" component
  * ✅ Add link to "bundlephobia" to check file size
  * @todo Add event handler on "magnifier"
- * @todo Add Title & Footer
- *    Add Google Font
- *    Make the title to use the google font
- * @todo Credit links -> Michael Jackson (unpkg) & Shubham Kanodia  (bundlePhobia)
- * @todo Add Google Analytics
+ * ✅ Add Title & Footer
+ * ✅ Add Google Font
+ * ✅ Make the title to use the google font
+ * ✅ Credit links -> Michael Jackson (unpkg) & Shubham Kanodia  (bundlePhobia)
+ * ✅ Add Google Analytics
  *
  * ✅ Cache components - going back & forth loads component every time!
  * @todo Instead of a Wizard, display kind of popup CodeSandBox uses on "Add Dependency" dialog
