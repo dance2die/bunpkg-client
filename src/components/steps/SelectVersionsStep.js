@@ -3,9 +3,9 @@ import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 
-import { getEncodePackageName } from "../util/index";
-import { getVersions } from "../data/SearchRepository";
-import PackageContext from "../data/PackageContext";
+import { getEncodePackageName } from "../../util/index";
+import { getVersions } from "../../data/SearchRepository";
+import PackageContext from "../../data/PackageContext";
 
 const renderListItem = version => {
   return (

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { List, Spin, Button, message } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import ExternalLink from "./ExternalLink";
-import { getPackageInfo } from "../data/SearchRepository";
+import ExternalLink from "../ExternalLink";
+import { getPackageInfo } from "../../data/SearchRepository";
 
 import {
   buildUnpkgURL,
@@ -12,7 +12,7 @@ import {
   buildUnpkgScript,
   buildBundlePhobiaURL,
   isEmpty
-} from "../util/index";
+} from "../../util/index";
 
 const CopyButton = ({ clipboardText, buttonText }) => (
   <CopyToClipboard

@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { AutoComplete, Icon, Input } from "antd";
 import debounce from "tiny-debounce";
 
-import { getSuggestions } from "../data/SearchRepository";
-import { getEncodePackageName } from "../util/index";
-import PackageContext from "../data/PackageContext";
+import { getSuggestions } from "../../data/SearchRepository";
+import { getEncodePackageName } from "../../util/index";
+import PackageContext from "../../data/PackageContext";
 
 const renderOption = suggestion => (
   <AutoComplete.Option
