@@ -24,11 +24,14 @@
     "tiny-debounce": "0.1.1",
     "url-join": "4.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-import": "1.8.0",
+    "react-app-rewired": "1.6.2"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "react-app-rewired start --scripts-version react-scripts-ts",
+    "build": "react-app-rewired build --scripts-version react-scripts-ts",
+    "test": "react-app-rewired test --env=jsdom --scripts-version react-scripts-ts"
   }
 }

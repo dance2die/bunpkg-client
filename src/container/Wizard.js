@@ -13,7 +13,7 @@ import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
  * @todo Override Create-react-app
  *  * Reduce AntD import size
  *  * Install {@link https://github.com/entwicklerstube/babel-plugin-root-import|babel-plugin-root-import} for a cleaner imports for dynamic imports
- *  * {@link https://ant.design/docs/react/use-in-typescript#Advanced-Guides|AntD Advanced Guides}
+ *  * {@link https://ant.design/docs/react/use-with-create-react-app#Advanced-Guides|AntD Advanced Guides}
  * @todo Dynamically load "SelectVersionsStep" & "UnpkgLinksStep" components to reduce size
  *  - https://www.slightedgecoder.com/2017/12/03/loading-react-components-dynamically-demand/#case3
  *  - https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting
