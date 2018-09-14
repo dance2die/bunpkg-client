@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { List, Spin, Button, message } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -146,32 +146,6 @@ class UnpkgLinksStep extends Component {
           version={version}
           homepage={homepage}
         />
-        {/*<header>
-          <div>
-            Browse all on Unpkg 🖥
-            <a
-              target="_blank"
-              href={buildUnpkgDirectoryURL(packageName, version)}
-            >{`${packageName}@${version}`}</a>
-          </div>
-          <div>
-            Bundle Cost 💰
-            <a
-              target="_blank"
-              href={buildBundlePhobiaURL(packageName, version)}
-            >
-              BundlePhobia
-            </a>
-          </div>
-          {homepage && (
-            <Fragment>
-              Project Home 🏠:
-              <a target="_blank" href={homepage}>
-                {homepage}
-              </a>
-            </Fragment>
-          )}
-        </header>*/}
         <section>
           <div>{this.renderFiles()}</div>
         </section>
