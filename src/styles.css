@@ -85,7 +85,11 @@
   margin-top: 16px;
   min-height: 200px;
   text-align: center;
-  padding-top: 4em;
+  /* padding-top: 4em; */
+}
+
+.select-versions {
+  padding-top: 2em;
 }
 
 .steps-content a {
@@ -124,6 +128,7 @@
 
 .search-autocomplete {
   font-size: 2rem;
+  padding-top: 2em;
 }
 
 .ant-row {
@@ -197,8 +202,11 @@
   }
 
   .search-autocomplete {
-    padding-top: 2rem;
     width: 90%;
+  }
+
+  .select-versions {
+    padding-top: 0;
   }
 
   .select-versions ant-list {
