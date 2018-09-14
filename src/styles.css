@@ -98,7 +98,6 @@
 
 .ant-list-split {
   margin: 2.5em auto;
-  height: 50vh;
   overflow: auto;
 }
 
@@ -117,6 +116,10 @@
 
 .result-list {
   margin-bottom: 2.5em;
+}
+
+.result-header-list {
+  text-align: left;
 }
 
 .search-autocomplete {

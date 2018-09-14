@@ -11,6 +11,10 @@ import UnpkgLinksStep from "../components/UnpkgLinksStep";
 
 /**
  * @todo Add filter in result to show only "minified" javascript files
+ * @todo Add project "repo" & "homepage" in the result
+ * @todo Add a route to receive a param -
+ *    If "package" name is passed, then go to 2nd step,
+ *    If both package & version is given, go straight to 3rd step
  * ✅ Make each step clickable
  *    Step 1 - always clickable
  *    Step 2 - clickable if "packageName" exists

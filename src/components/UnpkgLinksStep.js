@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { List, Spin, Button, message } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+import ExternalLink from "./ExternalLink";
 import { getPackageInfo } from "../data/SearchRepository";
 
 import {
@@ -23,6 +24,43 @@ const CopyButton = ({ clipboardText, buttonText }) => (
     </Button>
   </CopyToClipboard>
 );
+
+const ResultHeader = ({ packageName, version, homepage }) => {
+  const dataSource = [
+    {
+      title: "Browse all on Unpkg",
+      content: `${packageName}@${version}`,
+      emoji: "💻",
+      href: buildUnpkgDirectoryURL(packageName, version)
+    },
+    {
+      title: "Bundle Cost on ",
+      content: `BundlePhobia`,
+      emoji: "💰",
+      href: buildBundlePhobiaURL(packageName, version)
+    },
+    {
+      title: "Home",
+      content: `${homepage}`,
+      emoji: "🏠",
+      href: homepage
+    }
+  ];
+
+  return (
+    <List
+      className="result-header-list"
+      itemLayout="horizontal"
+      dataSource={dataSource}
+      renderItem={item => (
+        <List.Item>
+          <List.Item.Meta title={`${item.emoji} ${item.title}`} />
+          <ExternalLink href={item.href}>{item.content}</ExternalLink>
+        </List.Item>
+      )}
+    />
+  );
+};
 
 class UnpkgLinksStep extends Component {
   static propTypes = {
@@ -98,20 +136,26 @@ class UnpkgLinksStep extends Component {
   render() {
     const { packageName, version } = this.props;
     const { meta, files } = this.state;
+    const { homepage } = meta;
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
     return (
       <div className="unpkg-links">
-        <header>
+        <ResultHeader
+          packageName={packageName}
+          version={version}
+          homepage={homepage}
+        />
+        {/*<header>
           <div>
-            Browse all on Unpkg
+            Browse all on Unpkg 🖥
             <a
               target="_blank"
               href={buildUnpkgDirectoryURL(packageName, version)}
             >{`${packageName}@${version}`}</a>
           </div>
           <div>
-            Bundle Cost on
+            Bundle Cost 💰
             <a
               target="_blank"
               href={buildBundlePhobiaURL(packageName, version)}
@@ -119,7 +163,15 @@ class UnpkgLinksStep extends Component {
               BundlePhobia
             </a>
           </div>
-        </header>
+          {homepage && (
+            <Fragment>
+              Project Home 🏠:
+              <a target="_blank" href={homepage}>
+                {homepage}
+              </a>
+            </Fragment>
+          )}
+        </header>*/}
         <section>
           <div>{this.renderFiles()}</div>
         </section>

@@ -1,11 +1,6 @@
 import React, { Fragment } from "react";
 import Emoji from "./Emoji";
-
-const ExternalLink = ({ href, children }) => (
-  <a href={href} target="_blank">
-    {children}
-  </a>
-);
+import ExternalLink from "./ExternalLink";
 
 const Credit = () => (
   <Fragment>
