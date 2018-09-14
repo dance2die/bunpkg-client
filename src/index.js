@@ -6,7 +6,7 @@ import { Layout, Row, Col } from "antd";
 import Wizard from "./container/Wizard";
 import AppFooter from "./components/AppFooter";
 
-// import "antd/dist/antd.css";
+import "antd/dist/antd.css";
 import "./styles.css";
 
 const { Content } = Layout;
