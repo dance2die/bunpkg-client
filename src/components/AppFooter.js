@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import Emoji from "./Emoji";
-import ExternalLink from "./ExternalLink";
+import { ExternalLink } from "./Links";
 
 const Credit = () => (
   <Fragment>

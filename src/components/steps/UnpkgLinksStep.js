@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { List, Spin, Button, message } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import ExternalLink from "../ExternalLink";
+import { ExternalLink } from "../Links";
 import { getPackageInfo } from "../../data/SearchRepository";
 
 import {
