@@ -39,7 +39,7 @@ const App = () => (
     </Row>
     <Row>
       <Column>
-        <Content className="app-content">
+        <Content className="app-content" role="main">
           <Wizard />
         </Content>
       </Column>
