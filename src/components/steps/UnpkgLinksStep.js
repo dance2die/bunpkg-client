@@ -28,8 +28,8 @@ const CopyButton = ({ clipboardText, buttonText }) => (
 const ResultHeader = ({ packageName, version, homepage }) => {
   const dataSource = [
     {
-      title: "Browse all on Unpkg",
-      content: `${packageName}@${version}`,
+      title: `Browse "${packageName}@${version}" on`,
+      content: `UNPKG`,
       emoji: "💻",
       href: buildUnpkgDirectoryURL(packageName, version)
     },
