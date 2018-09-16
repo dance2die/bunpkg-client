@@ -12,7 +12,7 @@ const renderListItem = version => {
     <PackageContext.Consumer>
       {({ setVersion }) => (
         <List.Item key={version} onClick={() => setVersion(version)}>
-          <List.Item.Meta title={<strong>{version}</strong>} />
+          <List.Item.Meta description={<strong>{version}</strong>} />
         </List.Item>
       )}
     </PackageContext.Consumer>

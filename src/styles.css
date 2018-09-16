@@ -124,6 +124,9 @@
 .ant-steps-item-process .ant-steps-item-icon {
   border: none;
 }
+.ant-list-item-meta-description {
+  color: black;
+}
 
 .wizard-step:hover {
   cursor: pointer;
