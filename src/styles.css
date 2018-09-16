@@ -243,3 +243,6 @@ a {
 .ant-select-selection__placeholder {
   color: #666;
 }
+.ant-select-dropdown-menu-item.suggestions[role="option"] > * {
+  color: rgba(0, 0, 0, 1);
+}
