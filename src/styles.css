@@ -237,3 +237,6 @@
 .ant-steps-item-wait > .ant-steps-item-content > .ant-steps-item-title {
   color: rgba(0, 0, 0, 0.75);
 }
+a {
+  color: rgb(70, 90, 255);
+}
