@@ -114,6 +114,17 @@
   cursor: pointer;
 }
 
+/* Changed according Accessibility recommendations by aXe */
+.ant-steps-item-process .ant-steps-item-icon {
+  background: peachpuff;
+}
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
+  color: #000;
+}
+.ant-steps-item-process .ant-steps-item-icon {
+  border: none;
+}
+
 .wizard-step:hover {
   cursor: pointer;
 }
