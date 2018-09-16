@@ -54,7 +54,7 @@ const ResultHeader = ({ packageName, version, homepage }) => {
       dataSource={dataSource}
       renderItem={item => (
         <List.Item>
-          <List.Item.Meta title={`${item.emoji} ${item.title}`} />
+          <List.Item.Meta description={`${item.emoji} ${item.title}`} />
           <ExternalLink href={item.href}>{item.content}</ExternalLink>
         </List.Item>
       )}
@@ -99,7 +99,7 @@ class UnpkgLinksStep extends Component {
         ]}
       >
         <List.Item.Meta
-          title={
+          description={
             <strong>
               <a
                 href={buildUnpkgURL(packageName, version, file)}
