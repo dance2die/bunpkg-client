@@ -6,8 +6,14 @@ import { Layout, Row, Col } from "antd";
 import Wizard from "./container/Wizard";
 import AppFooter from "./components/AppFooter";
 
-import "antd/dist/antd.css";
 import "./styles.css";
+
+// CodeSandBox doesn't honor react-app-rewire.
+// So let's import it during development mode only.
+// When published on Netlify, it'd be stripped off.
+if (process.env.NODE_ENV === "development") {
+  import("antd/dist/antd.css");
+}
 
 const { Content } = Layout;
 const dimension = {
