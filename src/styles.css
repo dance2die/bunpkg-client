@@ -114,20 +114,6 @@
   cursor: pointer;
 }
 
-/* Changed according Accessibility recommendations by aXe */
-.ant-steps-item-process .ant-steps-item-icon {
-  background: peachpuff;
-}
-.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
-  color: #000;
-}
-.ant-steps-item-process .ant-steps-item-icon {
-  border: none;
-}
-.ant-list-item-meta-description {
-  color: black;
-}
-
 .wizard-step:hover {
   cursor: pointer;
 }
@@ -230,4 +216,24 @@
   .result-list {
     margin: 0.6rem;
   }
+}
+
+/* Changed according Accessibility recommendations by aXe */
+.ant-steps-item-process .ant-steps-item-icon {
+  background: peachpuff;
+}
+.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
+  color: #000;
+}
+.ant-steps-item-process .ant-steps-item-icon {
+  border: none;
+}
+.ant-list-item-meta-description {
+  color: black;
+}
+.ant-steps-item-wait .ant-steps-item-icon > .ant-steps-icon {
+  color: rgba(0, 0, 0, 0.75);
+}
+.ant-steps-item-wait > .ant-steps-item-content > .ant-steps-item-title {
+  color: rgba(0, 0, 0, 0.75);
 }
