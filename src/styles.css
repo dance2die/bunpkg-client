@@ -220,10 +220,10 @@
 
 /* Changed according Accessibility recommendations by aXe */
 .ant-steps-item-process .ant-steps-item-icon {
-  background: peachpuff;
+  background: rgb(9, 95, 255);
 }
 .ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon {
-  color: #000;
+  color: #fff;
 }
 .ant-steps-item-process .ant-steps-item-icon {
   border: none;
