@@ -56,7 +56,7 @@ class SearchPackageStep extends Component {
             placeholder="search package"
             optionLabelProp="value"
           >
-            <Input suffix={<Icon type="search" />} />
+            <Input suffix={<Icon type="search" />} aria-label="search icon" />
           </AutoComplete>
         )}
       </PackageContext.Consumer>
