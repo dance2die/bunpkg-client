@@ -240,3 +240,6 @@
 a {
   color: rgb(70, 90, 255);
 }
+.ant-select-selection__placeholder {
+  color: #666;
+}

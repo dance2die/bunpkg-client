@@ -44,7 +44,7 @@ const AppFooter = () => (
   <footer className="app-footer">
     <div className="made-with">
       Made with{" "}
-      <Emoji label={"Heart"} style={{ color: "red" }}>
+      <Emoji label={"Heart"} style={{ color: "#EE0701" }}>
         ❤
       </Emoji>{" "}
       by <ExternalLink href="https://sungkim.co/">Sung Kim</ExternalLink>
