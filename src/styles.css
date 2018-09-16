@@ -246,3 +246,7 @@ a {
 .ant-select-dropdown-menu-item.suggestions[role="option"] > * {
   color: rgba(0, 0, 0, 1);
 }
+.ant-btn-primary {
+  background-color: rgb(9, 95, 255);
+  border-color: rgb(9, 95, 255);
+}
