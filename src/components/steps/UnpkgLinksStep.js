@@ -83,6 +83,8 @@ class UnpkgLinksStep extends Component {
   }
 
   renderMainCopyButton = (packageName, version, file) => {
+    if (file.endsWith(".map")) return null;
+
     return file.endsWith(".css") ? (
       <CopyButton
         clipboardText={buildUnpkgLinkTag(packageName, version, file)}
