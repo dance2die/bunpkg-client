@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { List, Spin, Button, message } from "antd";
+import { List, Spin, Button, message, Checkbox } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { ExternalLink } from "../Links";
@@ -72,7 +72,8 @@ class UnpkgLinksStep extends Component {
   state = {
     meta: {},
     files: [],
-    isLoading: false
+    isLoading: false,
+    minifiedFilesOnly: true
   };
 
   componentDidMount() {
@@ -129,13 +130,18 @@ class UnpkgLinksStep extends Component {
   };
 
   renderFiles = () => {
-    const { meta, files, isLoading } = this.state;
-    if (isEmpty(meta) || files.length <= 0) return <Spin />;
+    const { meta, files, isLoading, minifiedFilesOnly } = this.state;
+    const byMinifiedFiles = file => !!file.match(/.min./gi);
+    const filteredFiles = minifiedFilesOnly
+      ? files.filter(byMinifiedFiles)
+      : files;
+
+    if (isEmpty(meta) || filteredFiles.length <= 0) return <Spin />;
 
     return (
       <List
         className="result-list"
-        dataSource={files}
+        dataSource={filteredFiles}
         renderItem={this.renderListItem}
       >
         {isLoading && (
@@ -147,9 +153,13 @@ class UnpkgLinksStep extends Component {
     );
   };
 
+  onMinifiedFilesOnlyChange = e => {
+    this.setState({ minifiedFilesOnly: e.target.checked });
+  };
+
   render() {
     const { packageName, version } = this.props;
-    const { meta, files } = this.state;
+    const { meta, files, minifiedFilesOnly } = this.state;
     const { homepage } = meta;
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
@@ -160,6 +170,12 @@ class UnpkgLinksStep extends Component {
           version={version}
           homepage={homepage}
         />
+        <Checkbox
+          onChange={this.onMinifiedFilesOnlyChange}
+          checked={minifiedFilesOnly}
+        >
+          Minified Files Only
+        </Checkbox>
         <section>
           <div>{this.renderFiles()}</div>
         </section>

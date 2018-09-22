@@ -10,17 +10,17 @@ import SelectVersionsStep from "../components/steps/SelectVersionsStep";
 import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
 
 /**
- * @todo Override Create-react-app
- *  * Reduce AntD import size
- *  * Install {@link https://github.com/entwicklerstube/babel-plugin-root-import|babel-plugin-root-import} for a cleaner imports for dynamic imports
- *  * {@link https://ant.design/docs/react/use-with-create-react-app#Advanced-Guides|AntD Advanced Guides}
+ * @todo Add filter in result to show only "minified" javascript files
  * @todo Dynamically load "SelectVersionsStep" & "UnpkgLinksStep" components to reduce size
  *  - https://www.slightedgecoder.com/2017/12/03/loading-react-components-dynamically-demand/#case3
  *  - https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting
- * @todo Add filter in result to show only "minified" javascript files
  * @todo Add a route to receive a param -
  *    If "package" name is passed, then go to 2nd step,
  *    If both package & version is given, go straight to 3rd step
+ * ✅ Override Create-react-app
+ *  * Reduce AntD import size
+ *  * Install {@link https://github.com/entwicklerstube/babel-plugin-root-import|babel-plugin-root-import} for a cleaner imports for dynamic imports
+ *  * {@link https://ant.design/docs/react/use-with-create-react-app#Advanced-Guides|AntD Advanced Guides}
  * ✅ Add project "repo" & "homepage" in the result
  * ✅ Make each step clickable
  *    Step 1 - always clickable
