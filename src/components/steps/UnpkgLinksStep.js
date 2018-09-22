@@ -9,7 +9,8 @@ import { getPackageInfo } from "../../data/SearchRepository";
 import {
   buildUnpkgURL,
   buildUnpkgDirectoryURL,
-  buildUnpkgScript,
+  buildUnpkgScriptTag,
+  buildUnpkgLinkTag,
   buildBundlePhobiaURL,
   isEmpty
 } from "../../util/index";
@@ -81,6 +82,20 @@ class UnpkgLinksStep extends Component {
     );
   }
 
+  renderMainCopyButton = (packageName, version, file) => {
+    return file.endsWith(".css") ? (
+      <CopyButton
+        clipboardText={buildUnpkgLinkTag(packageName, version, file)}
+        buttonText="Copy Link"
+      />
+    ) : (
+      <CopyButton
+        clipboardText={buildUnpkgScriptTag(packageName, version, file)}
+        buttonText="Copy Script"
+      />
+    );
+  };
+
   renderListItem = file => {
     const { packageName, version } = this.props;
 
@@ -88,10 +103,7 @@ class UnpkgLinksStep extends Component {
       <List.Item
         key={file}
         actions={[
-          <CopyButton
-            clipboardText={buildUnpkgScript(packageName, version, file)}
-            buttonText="Copy Script"
-          />,
+          this.renderMainCopyButton(packageName, version, file),
           <CopyButton
             clipboardText={buildUnpkgURL(packageName, version, file)}
             buttonText="Copy Unpkg"

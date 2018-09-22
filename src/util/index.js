@@ -12,8 +12,10 @@ const buildUnpkgURL = (packageName, version, file) =>
   urljoin(unpkgURLRoot, `${packageName}@${version}`, file);
 const buildUnpkgDirectoryURL = (packageName, version) =>
   urljoin(unpkgURLRoot, `${packageName}@${version}/`);
-const buildUnpkgScript = (packageName, version, file) =>
+const buildUnpkgScriptTag = (packageName, version, file) =>
   `<script src="${buildUnpkgURL(packageName, version, file)}"></script>`;
+const buildUnpkgLinkTag = (packageName, version, file) =>
+  `<link rel="stylesheet" href="${buildUnpkgURL(packageName, version, file)}">`;
 
 const bundlePhobiaURLRoot = `https://bundlephobia.com`;
 const buildBundlePhobiaURL = (packageName, version) =>
@@ -37,6 +39,7 @@ export {
   buildUnpkgURL,
   buildUnpkgDirectoryURL,
   buildBundlePhobiaURL,
-  buildUnpkgScript,
+  buildUnpkgScriptTag,
+  buildUnpkgLinkTag,
   isEmpty
 };
