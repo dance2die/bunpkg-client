@@ -114,6 +114,9 @@
 
 .ant-list-item:hover {
   background-color: papayawhip;
+}
+
+.version:hover {
   cursor: pointer;
 }
 
