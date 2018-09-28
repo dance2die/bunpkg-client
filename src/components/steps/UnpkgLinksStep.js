@@ -78,9 +78,14 @@ class UnpkgLinksStep extends Component {
 
   componentDidMount() {
     const { packageName, version } = this.props;
-    getPackageInfo(packageName, version).then(({ meta, files }) =>
-      this.setState({ meta, files })
-    );
+    getPackageInfo(packageName, version)
+      .then(({ meta, files }) => this.setState({ meta, files }))
+      .catch(error => {
+        this.setState({ isLoading: false }, () => {
+          // bubble up to let the error boundary in the Wizard to display the error
+          throw new Error(error);
+        });
+      });
   }
 
   renderMainCopyButton = (packageName, version, file) => {

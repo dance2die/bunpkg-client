@@ -31,7 +31,6 @@ const getSuggestions = query =>
     .then(sortData)
     .then(extractProperties);
 
-// const sortVersions = _ => _.sort((v1, v2) => v2 - v1);
 const getVersions = packageName =>
   axios
     .get(`https://bunpkg.herokuapp.com/api/versions/${packageName}`)
