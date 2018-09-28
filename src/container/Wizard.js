@@ -67,10 +67,11 @@ class Wizard extends Component {
   state = {
     current: wizardStep.searchPackage,
     packageName: "",
-    version: ""
+    version: "",
+    // Clearing error boundary Fallback component
+    // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
+    errorBoundaryKey: 0
   };
-
-  error = React.createRef();
 
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
   prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
@@ -92,9 +93,6 @@ class Wizard extends Component {
   };
 
   onStepClick = current => {
-    // Super hack! as "react-error-boundary" does not offer a way to clear an error
-    this.error.current.state.error = null;
-
     const { packageName, version } = this.state;
 
     if (current === wizardStep.selectVersions && packageName === "") return;
@@ -104,11 +102,11 @@ class Wizard extends Component {
     )
       return;
 
-    this.setState({ current });
+    this.setState(prevState => ({ current, errorBoundaryKey: prevState + 1 }));
   };
 
   render() {
-    const { current } = this.state;
+    const { current, errorBoundaryKey } = this.state;
 
     return (
       <PackageContext.Provider
@@ -129,7 +127,7 @@ class Wizard extends Component {
         </Steps>
         <div className="steps-content">
           <ErrorBoundary
-            ref={this.error}
+            key={errorBoundaryKey}
             FallbackComponent={ErrorFallbackComponent}
           >
             {this.getContent()}
