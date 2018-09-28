@@ -70,6 +70,8 @@ class Wizard extends Component {
     version: ""
   };
 
+  error = React.createRef();
+
   next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
   prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
 
@@ -90,6 +92,9 @@ class Wizard extends Component {
   };
 
   onStepClick = current => {
+    // Super hack! as "react-error-boundary" does not offer a way to clear an error
+    this.error.current.state.error = null;
+
     const { packageName, version } = this.state;
 
     if (current === wizardStep.selectVersions && packageName === "") return;
@@ -123,7 +128,10 @@ class Wizard extends Component {
           ))}
         </Steps>
         <div className="steps-content">
-          <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+          <ErrorBoundary
+            ref={this.error}
+            FallbackComponent={ErrorFallbackComponent}
+          >
             {this.getContent()}
           </ErrorBoundary>
         </div>
