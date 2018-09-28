@@ -102,7 +102,10 @@ class Wizard extends Component {
     )
       return;
 
-    this.setState(prevState => ({ current, errorBoundaryKey: prevState + 1 }));
+    this.setState(prevState => ({
+      current,
+      errorBoundaryKey: prevState.errorBoundaryKey + 1
+    }));
   };
 
   render() {
