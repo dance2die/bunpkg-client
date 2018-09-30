@@ -79,7 +79,9 @@ class UnpkgLinksStep extends Component {
   componentDidMount() {
     const { packageName, version } = this.props;
     getPackageInfo(packageName, version)
-      .then(({ meta, files }) => this.setState({ meta, files }))
+      .then(({ meta, files }) =>
+        this.setState({ meta, files, isLoading: false })
+      )
       .catch(error => {
         this.setState({ isLoading: false }, () => {
           // bubble up to let the error boundary in the Wizard to display the error
@@ -141,7 +143,11 @@ class UnpkgLinksStep extends Component {
       ? files.filter(byMinifiedFiles)
       : files;
 
-    if (isEmpty(meta) || filteredFiles.length <= 0) return <Spin />;
+    if (isEmpty(meta)) return <Spin />;
+    if (filteredFiles.length <= 0)
+      return (
+        <p className="no-min-files-message">No Minified Files Available</p>
+      );
 
     return (
       <List

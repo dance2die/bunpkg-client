@@ -142,6 +142,12 @@
   width: 100%;
 }
 
+.no-min-files-message {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 1em;
+}
+
 @media only screen and (min-width: 1351px) {
   .ant-row {
     width: 50%;
