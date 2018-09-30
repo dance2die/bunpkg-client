@@ -37,9 +37,22 @@ const getVersions = packageName =>
     .then(filterByData)
     .then(semverSort.desc);
 
+const isScopedPakcge = packageName => packageName.charAt(0) === "@";
+
+// Refer to Michael Jackson's UNPKG source
+// https://github.com/unpkg/unpkg.com/blob/82d404a973cfe24a2a632859cbb6ab8958d48e9e/modules/utils/fetchNpmPackageInfo.js#L15
+const encodePackageName = packageName =>
+  isScopedPakcge(packageName)
+    ? `@${encodeURIComponent(packageName.substring(1))}`
+    : encodeURIComponent(packageName);
+
 const getPackageInfo = (packageName, version) =>
   axios
-    .get(`https://bunpkg.herokuapp.com/api/info/${packageName}/${version}`)
+    .get(
+      `https://bunpkg.herokuapp.com/api/info/${encodePackageName(
+        packageName
+      )}/${version}`
+    )
     .then(filterByData);
 
 export { getSuggestions, getVersions, getPackageInfo };
