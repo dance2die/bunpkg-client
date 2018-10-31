@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
+import semverSort from "semver-sort";
 
 import { getEncodePackageName } from "../../util/index";
 import { getVersions } from "../../data/SearchRepository";
@@ -39,9 +40,9 @@ class SelectVersionsStep extends Component {
     const { packageName } = this.props;
     const encodedPackageName = getEncodePackageName(packageName);
 
-    getVersions(encodedPackageName).then(versions => {
-      this.setState({ versions, isLoadingVersions: false });
-    });
+    getVersions(encodedPackageName).then(versions =>
+      this.setState({ versions, isLoadingVersions: false })
+    );
   }
 
   onStableVersionsOnlyChange = e => {
@@ -54,7 +55,11 @@ class SelectVersionsStep extends Component {
   };
 
   render() {
-    const { stableVersionsOnly, isLoadingVersions } = this.state;
+    const { stableVersionsOnly, isLoadingVersions, versions } = this.state;
+    if (!Array.isArray(versions)) throw new Error(versions);
+    if (versions.length <= 0) return <div>Loading versions...</div>;
+
+    const dataSource = this.filteredVersions();
 
     return (
       <div className="select-versions">
@@ -64,7 +69,7 @@ class SelectVersionsStep extends Component {
         >
           Stable Versions Only
         </Checkbox>
-        <List dataSource={this.filteredVersions()} renderItem={renderListItem}>
+        <List dataSource={dataSource} renderItem={renderListItem}>
           {isLoadingVersions && (
             <div className="demo-loading-container">
               <Spin />

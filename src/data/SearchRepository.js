@@ -35,7 +35,8 @@ const getVersions = packageName =>
   axios
     .get(`https://bunpkg.herokuapp.com/api/versions/${packageName}`)
     .then(filterByData)
-    .then(semverSort.desc);
+    .then(semverSort.desc)
+    .catch(error => error);
 
 const isScopedPakcge = packageName => packageName.charAt(0) === "@";
 
@@ -55,4 +56,4 @@ const getPackageInfo = (packageName, version) =>
     )
     .then(filterByData);
 
-export { getSuggestions, getVersions, getPackageInfo };
+export { getSuggestions, getVersions, getPackageInfo, filterByData };
