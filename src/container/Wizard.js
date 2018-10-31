@@ -1,13 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
 import PackageContext from "../data/PackageContext";
 
 import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
-import SearchPackageStep from "../components/steps/SearchPackageStep";
-import SelectVersionsStep from "../components/steps/SelectVersionsStep";
-import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+
+import * as Events from "../components/steps";
+
+// import SearchPackageStep from "../components/steps/SearchPackageStep";
+// import SelectVersionsStep from "../components/steps/SelectVersionsStep";
+// import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+const SearchPackageStep = Events.SearchPackageStep;
+const SelectVersionsStep = Events.SelectVersionsStep;
+const UnpkgLinksStep = Events.UnpkgLinksStep;
 
 /**
  * @todo Add filter in result to show only "minified" javascript files
@@ -129,12 +135,14 @@ class Wizard extends Component {
           ))}
         </Steps>
         <div className="steps-content">
-          <ErrorBoundary
-            key={errorBoundaryKey}
-            FallbackComponent={ErrorFallbackComponent}
-          >
-            {this.getContent()}
-          </ErrorBoundary>
+          <Suspense fallback={<div>Loading steps...</div>}>
+            <ErrorBoundary
+              key={errorBoundaryKey}
+              FallbackComponent={ErrorFallbackComponent}
+            >
+              {this.getContent()}
+            </ErrorBoundary>
+          </Suspense>
         </div>
       </PackageContext.Provider>
     );

@@ -2,7 +2,11 @@
   "name": "bunpkg",
   "version": "1.0.0",
   "description": "Build UNPKG Links by Searching",
-  "keywords": ["unpkg", "bunpkg", "npm"],
+  "keywords": [
+    "unpkg",
+    "bunpkg",
+    "npm"
+  ],
   "license": "MIT",
   "main": "src/index.js",
   "homepage": "https://bunpkg.com/",
@@ -14,17 +18,17 @@
     "antd": "3.9.2",
     "axios": "0.18.0",
     "prop-types": "15.6.2",
-    "react": "16.5.1",
+    "react": "16.6.0",
+    "react-app-rewired": "1.6.2",
     "react-copy-to-clipboard": "5.0.1",
-    "react-dom": "16.5.1",
+    "react-dom": "16.6.0",
     "react-error-boundary": "1.2.3",
-    "react-scripts": "1.1.4",
+    "react-scripts": "2.1.0",
     "semver-sort": "0.0.4",
     "semver-stable": "2.0.4",
     "styled-components": "3.4.6",
     "tiny-debounce": "0.1.1",
-    "url-join": "4.0.0",
-    "react-app-rewired": "1.6.2"
+    "url-join": "4.0.0"
   },
   "devDependencies": {
     "babel-plugin-import": "1.8.0"
