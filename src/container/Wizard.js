@@ -5,15 +5,14 @@ import ErrorBoundary from "react-error-boundary";
 import PackageContext from "../data/PackageContext";
 
 import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
+// import SearchPackageStep from "../components/steps/SearchPackageStep";
+// import SelectVersionsStep from "../components/steps/SelectVersionsStep";
+// import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
 
-// import * as Events from "../components/steps";
-// const SearchPackageStep = Events.SearchPackageStep;
-// const SelectVersionsStep = Events.SelectVersionsStep;
-// const UnpkgLinksStep = Events.UnpkgLinksStep;
-
-import SearchPackageStep from "../components/steps/SearchPackageStep";
-import SelectVersionsStep from "../components/steps/SelectVersionsStep";
-import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+import * as Events from "../components/steps";
+const SearchPackageStep = Events.SearchPackageStep;
+const SelectVersionsStep = Events.SelectVersionsStep;
+const UnpkgLinksStep = Events.UnpkgLinksStep;
 
 /**
  * @todo Add filter in result to show only "minified" javascript files
@@ -124,26 +123,26 @@ class Wizard extends Component {
           setVersion: this.setVersion
         }}
       >
-        <Steps current={current}>
-          {steps.map((item, step) => (
-            <Steps.Step
-              className="wizard-step"
-              key={item.title}
-              title={item.title}
-              onClick={e => this.onStepClick(step)}
-            />
-          ))}
-        </Steps>
-        <div className="steps-content">
-          <Suspense fallback={<div>Loading steps...</div>}>
+        <Suspense fallback={<div>Loading steps...</div>}>
+          <Steps current={current}>
+            {steps.map((item, step) => (
+              <Steps.Step
+                className="wizard-step"
+                key={item.title}
+                title={item.title}
+                onClick={e => this.onStepClick(step)}
+              />
+            ))}
+          </Steps>
+          <div className="steps-content">
             <ErrorBoundary
               key={errorBoundaryKey}
               FallbackComponent={ErrorFallbackComponent}
             >
               {this.getContent()}
             </ErrorBoundary>
-          </Suspense>
-        </div>
+          </div>
+        </Suspense>
       </PackageContext.Provider>
     );
   }
