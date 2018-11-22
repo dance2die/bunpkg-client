@@ -45,7 +45,6 @@
 
 .made-with {
   font-size: 0.75rem;
-  text-decoration: underline;
   margin-top: 1.75em;
 }
 
@@ -63,7 +62,7 @@
 
 .source-code {
   font-size: 0.75rem;
-  margin-left: 0.5em;
+  margin: 0.5em 0 0 0.5em;
 }
 
 .app-content {
