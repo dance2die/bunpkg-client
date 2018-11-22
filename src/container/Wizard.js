@@ -5,14 +5,14 @@ import ErrorBoundary from "react-error-boundary";
 import PackageContext from "../data/PackageContext";
 
 import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
-// import SearchPackageStep from "../components/steps/SearchPackageStep";
-// import SelectVersionsStep from "../components/steps/SelectVersionsStep";
-// import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+import SearchPackageStep from "../components/steps/SearchPackageStep";
+import SelectVersionsStep from "../components/steps/SelectVersionsStep";
+import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
 
-import * as Events from "../components/steps";
-const SearchPackageStep = Events.SearchPackageStep;
-const SelectVersionsStep = Events.SelectVersionsStep;
-const UnpkgLinksStep = Events.UnpkgLinksStep;
+// import * as Events from "../components/steps";
+// const SearchPackageStep = Events.SearchPackageStep;
+// const SelectVersionsStep = Events.SelectVersionsStep;
+// const UnpkgLinksStep = Events.UnpkgLinksStep;
 
 /**
  * @todo Add filter in result to show only "minified" javascript files
