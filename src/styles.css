@@ -149,19 +149,22 @@
 
 @media only screen and (min-width: 1351px) {
   .ant-row {
-    width: 50%;
+    width: 45%;
   }
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1350px) {
   .ant-row {
-    width: 65%;
+    width: 45%;
+  }
+  .ant-steps-item-title {
+    font-size: 0.8rem;
   }
 }
 
 @media only screen and (min-width: 601px) and (max-width: 999px) {
   .ant-row {
-    width: 75%;
+    width: 65%;
   }
 
   .ant-steps-item-title {
