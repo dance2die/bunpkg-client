@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, lazy } from "react";
 import PropTypes from "prop-types";
 import { List, Spin, Button, message, Checkbox } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import { ExternalLink } from "../Links";
 import { getPackageInfo } from "../../data/SearchRepository";
+import BunpkgSuspense from "./../BunpkgSuspense";
 
 import {
   buildUnpkgURL,
@@ -14,6 +14,8 @@ import {
   buildBundlePhobiaURL,
   isEmpty
 } from "../../util/index";
+
+const ExternalLink = lazy(() => import("./../ExternalLink"));
 
 const CopyButton = ({ clipboardText, buttonText }) => (
   <CopyToClipboard
@@ -175,22 +177,24 @@ class UnpkgLinksStep extends Component {
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
     return (
-      <div className="unpkg-links">
-        <ResultHeader
-          packageName={packageName}
-          version={version}
-          homepage={homepage}
-        />
-        <Checkbox
-          onChange={this.onMinifiedFilesOnlyChange}
-          checked={minifiedFilesOnly}
-        >
-          Minified Files Only
-        </Checkbox>
-        <section>
-          <div>{this.renderFiles()}</div>
-        </section>
-      </div>
+      <BunpkgSuspense>
+        <div className="unpkg-links">
+          <ResultHeader
+            packageName={packageName}
+            version={version}
+            homepage={homepage}
+          />
+          <Checkbox
+            onChange={this.onMinifiedFilesOnlyChange}
+            checked={minifiedFilesOnly}
+          >
+            Minified Files Only
+          </Checkbox>
+          <section>
+            <div>{this.renderFiles()}</div>
+          </section>
+        </div>
+      </BunpkgSuspense>
     );
   }
 }

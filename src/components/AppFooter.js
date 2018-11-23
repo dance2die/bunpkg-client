@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
-import { ExternalLink } from "./Links";
 
 const Emoji = lazy(() => import("./Emoji"));
+const ExternalLink = lazy(() => import("./ExternalLink"));
 
 const SourceCode = () => (
   <>
