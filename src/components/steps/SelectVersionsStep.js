@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
@@ -26,10 +26,6 @@ function Version({ version }) {
 function renderListItem(version) {
   return <Version version={version} />;
 }
-
-SelectVersionsStep.propTypes = {
-  packageName: PropTypes.string.isRequired
-};
 
 function SelectVersionsStep({ packageName }) {
   const defaultVersions = [];
@@ -78,5 +74,9 @@ function SelectVersionsStep({ packageName }) {
     </div>
   );
 }
+
+SelectVersionsStep.propTypes = {
+  packageName: PropTypes.string.isRequired
+};
 
 export default SelectVersionsStep;
