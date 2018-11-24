@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { AutoComplete, Icon, Input } from "antd";
 import debounce from "tiny-debounce";
 
@@ -6,62 +6,49 @@ import { getSuggestions } from "../../data/SearchRepository";
 import { getEncodePackageName } from "../../util/index";
 import PackageContext from "../../data/PackageContext";
 
-const renderOption = suggestion => (
-  <AutoComplete.Option
-    className="suggestions"
-    key={suggestion.name}
-    value={suggestion.name}
-  >
-    <span>{suggestion.name}</span>
-    <div>{suggestion.description}</div>
+const renderOption = ({ name, description }) => (
+  <AutoComplete.Option className="suggestions" key={name} value={name}>
+    <span>{name}</span>
+    <div>{description}</div>
   </AutoComplete.Option>
 );
 
-class SearchPackageStep extends Component {
-  static defaultState = {
-    suggestions: [],
-    packageName: ""
-  };
+function SearchPackageStep() {
+  const defaultSuggestions = [];
+  const [suggestions, setSuggestions] = useState(defaultSuggestions);
 
-  state = SearchPackageStep.defaultState;
+  function resetStatesToDefault() {
+    setSuggestions(defaultSuggestions);
+  }
 
-  fetchSuggestions = debounce(query => {
+  const fetchSuggestions = debounce(query => {
     const packageName = getEncodePackageName(query);
 
     if (packageName === "") {
-      this.setState(SearchPackageStep.defaultState);
-      return;
+      resetStatesToDefault();
+    } else {
+      getSuggestions(packageName).then(suggestions =>
+        setSuggestions(suggestions)
+      );
     }
-
-    getSuggestions(packageName).then(suggestions =>
-      this.setState({ suggestions })
-    );
   }, 300);
 
-  onSearch = query => {
-    this.fetchSuggestions(query);
-  };
-
-  render() {
-    const { suggestions } = this.state;
-
-    return (
-      <PackageContext.Consumer>
-        {({ setPackageName }) => (
-          <AutoComplete
-            className="search-autocomplete"
-            dataSource={suggestions.map(renderOption)}
-            onSelect={setPackageName}
-            onSearch={this.onSearch}
-            placeholder="search package"
-            optionLabelProp="value"
-          >
-            <Input suffix={<Icon type="search" />} aria-label="search icon" />
-          </AutoComplete>
-        )}
-      </PackageContext.Consumer>
-    );
-  }
+  return (
+    <PackageContext.Consumer>
+      {({ setPackageName }) => (
+        <AutoComplete
+          className="search-autocomplete"
+          dataSource={suggestions.map(renderOption)}
+          onSelect={setPackageName}
+          onSearch={fetchSuggestions}
+          placeholder="search package"
+          optionLabelProp="value"
+        >
+          <Input suffix={<Icon type="search" />} aria-label="search icon" />
+        </AutoComplete>
+      )}
+    </PackageContext.Consumer>
+  );
 }
 
 export default SearchPackageStep;
