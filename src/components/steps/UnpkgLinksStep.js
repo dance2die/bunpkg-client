@@ -80,6 +80,8 @@ class UnpkgLinksStep extends Component {
 
   componentDidMount() {
     const { packageName, version } = this.props;
+    console.log(`UnpkgLinksSteps packageName, version`, packageName, version);
+
     getPackageInfo(packageName, version)
       .then(({ meta, files }) =>
         this.setState({ meta, files, isLoading: false })

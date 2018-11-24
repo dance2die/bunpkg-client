@@ -1,84 +1,82 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, useContext } from "react";
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
-import semverSort from "semver-sort";
 
 import { getEncodePackageName } from "../../util/index";
 import { getVersions } from "../../data/SearchRepository";
 import PackageContext from "../../data/PackageContext";
 
-const renderListItem = version => {
+import BunpkgSuspense from "./../BunpkgSuspense";
+
+function Version({ version }) {
+  const { setVersion } = useContext(PackageContext);
+
   return (
-    <PackageContext.Consumer>
-      {({ setVersion }) => (
-        <List.Item
-          className="version"
-          key={version}
-          onClick={() => setVersion(version)}
-        >
-          <List.Item.Meta description={<strong>{version}</strong>} />
-        </List.Item>
-      )}
-    </PackageContext.Consumer>
+    <List.Item
+      className="version"
+      key={version}
+      onClick={() => setVersion(version)}
+    >
+      <List.Item.Meta description={<strong>{version}</strong>} />
+    </List.Item>
   );
+}
+
+function renderListItem(version) {
+  return <Version version={version} />;
+}
+
+SelectVersionsStep.propTypes = {
+  packageName: PropTypes.string.isRequired
 };
 
-class SelectVersionsStep extends Component {
-  static propTypes = {
-    packageName: PropTypes.string.isRequired
-  };
+function SelectVersionsStep({ packageName }) {
+  const defaultVersions = [];
+  const defaultStableVersionsOnly = true;
 
-  static defaultState = {
-    versions: [],
-    isLoadingVersions: true,
-    stableVersionsOnly: true
-  };
-  state = SelectVersionsStep.defaultState;
+  const [versions, setVersions] = useState(defaultVersions);
+  const [stableVersionsOnly, setStableVersionsOnly] = useState(
+    defaultStableVersionsOnly
+  );
 
-  componentDidMount() {
-    const { packageName } = this.props;
-    const encodedPackageName = getEncodePackageName(packageName);
+  useEffect(
+    () => {
+      const encodedPackageName = getEncodePackageName(packageName);
+      getVersions(encodedPackageName).then(setVersions);
+    },
+    [packageName, versions]
+  );
 
-    getVersions(encodedPackageName).then(versions =>
-      this.setState({ versions, isLoadingVersions: false })
-    );
+  function onStableVersionsOnlyChange(e) {
+    setStableVersionsOnly(e.target.checked);
   }
 
-  onStableVersionsOnlyChange = e => {
-    this.setState({ stableVersionsOnly: e.target.checked });
-  };
-
-  filteredVersions = () => {
-    const { stableVersionsOnly, versions } = this.state;
+  function filteredVersions() {
     return stableVersionsOnly ? versions.filter(stable.is) : versions;
-  };
-
-  render() {
-    const { stableVersionsOnly, isLoadingVersions, versions } = this.state;
-    if (!Array.isArray(versions)) throw new Error(versions);
-    if (versions.length <= 0) return <div>Loading versions...</div>;
-
-    const dataSource = this.filteredVersions();
-
-    return (
-      <div className="select-versions">
-        <Checkbox
-          onChange={this.onStableVersionsOnlyChange}
-          checked={stableVersionsOnly}
-        >
-          Stable Versions Only
-        </Checkbox>
-        <List dataSource={dataSource} renderItem={renderListItem}>
-          {isLoadingVersions && (
-            <div className="demo-loading-container">
-              <Spin />
-            </div>
-          )}
-        </List>
-      </div>
-    );
   }
+
+  if (!Array.isArray(versions)) throw new Error(versions);
+
+  return (
+    <div className="select-versions">
+      <Checkbox
+        onChange={onStableVersionsOnlyChange}
+        checked={stableVersionsOnly}
+      >
+        Stable Versions Only
+      </Checkbox>
+      <BunpkgSuspense
+        fallback={
+          <div className="demo-loading-container">
+            <Spin />
+          </div>
+        }
+      >
+        <List dataSource={filteredVersions()} renderItem={renderListItem} />
+      </BunpkgSuspense>
+    </div>
+  );
 }
 
 export default SelectVersionsStep;
