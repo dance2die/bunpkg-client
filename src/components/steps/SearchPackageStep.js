@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState, useContext } from "react";
 import { AutoComplete, Icon, Input } from "antd";
 import debounce from "tiny-debounce";
 
@@ -16,6 +16,7 @@ const renderOption = ({ name, description }) => (
 function SearchPackageStep() {
   const defaultSuggestions = [];
   const [suggestions, setSuggestions] = useState(defaultSuggestions);
+  const { setPackageName } = useContext(PackageContext);
 
   function resetStatesToDefault() {
     setSuggestions(defaultSuggestions);
@@ -34,20 +35,16 @@ function SearchPackageStep() {
   }, 300);
 
   return (
-    <PackageContext.Consumer>
-      {({ setPackageName }) => (
-        <AutoComplete
-          className="search-autocomplete"
-          dataSource={suggestions.map(renderOption)}
-          onSelect={setPackageName}
-          onSearch={fetchSuggestions}
-          placeholder="search package"
-          optionLabelProp="value"
-        >
-          <Input suffix={<Icon type="search" />} aria-label="search icon" />
-        </AutoComplete>
-      )}
-    </PackageContext.Consumer>
+    <AutoComplete
+      className="search-autocomplete"
+      dataSource={suggestions.map(renderOption)}
+      onSelect={setPackageName}
+      onSearch={fetchSuggestions}
+      placeholder="search package"
+      optionLabelProp="value"
+    >
+      <Input suffix={<Icon type="search" />} aria-label="search icon" />
+    </AutoComplete>
   );
 }
 
