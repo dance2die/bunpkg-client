@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from "react";
+import React, { Component } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
@@ -8,6 +8,8 @@ import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
 import SearchPackageStep from "../components/steps/SearchPackageStep";
 import SelectVersionsStep from "../components/steps/SelectVersionsStep";
 import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+
+import BunpkgSuspense from "../components/BunpkgSuspense";
 
 // import * as Events from "../components/steps";
 // const SearchPackageStep = Events.SearchPackageStep;
@@ -123,7 +125,7 @@ class Wizard extends Component {
           setVersion: this.setVersion
         }}
       >
-        <Suspense fallback={<div>Loading steps...</div>}>
+        <BunpkgSuspense>
           <Steps current={current}>
             {steps.map((item, step) => (
               <Steps.Step
@@ -142,7 +144,7 @@ class Wizard extends Component {
               {this.getContent()}
             </ErrorBoundary>
           </div>
-        </Suspense>
+        </BunpkgSuspense>
       </PackageContext.Provider>
     );
   }

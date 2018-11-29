@@ -2,12 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 import { getEncodePackageName } from "../../util/index";
 import { getVersions } from "../../data/SearchRepository";
 import PackageContext from "../../data/PackageContext";
 
-import BunpkgSuspense from "./../BunpkgSuspense";
+const VersionSpinnerContainer = styled.div`
+  margin: 3em 0;
+`;
 
 function Version({ version }) {
   const { setVersion } = useContext(PackageContext);
@@ -62,15 +65,13 @@ function SelectVersionsStep({ packageName }) {
       >
         Stable Versions Only
       </Checkbox>
-      <BunpkgSuspense
-        fallback={
-          <div className="demo-loading-container">
-            <Spin />
-          </div>
-        }
-      >
+      {versions.length === 0 ? (
+        <VersionSpinnerContainer>
+          <Spin />
+        </VersionSpinnerContainer>
+      ) : (
         <List dataSource={filteredVersions()} renderItem={renderListItem} />
-      </BunpkgSuspense>
+      )}
     </div>
   );
 }
