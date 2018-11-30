@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
@@ -39,10 +39,19 @@ function SelectVersionsStep({ packageName }) {
     defaultStableVersionsOnly
   );
 
-  useEffect(
+  const setCacheVersions = useCallback(
     () => {
       const encodedPackageName = getEncodePackageName(packageName);
       getVersions(encodedPackageName).then(setVersions);
+    },
+    [packageName, setVersions]
+  );
+
+  useEffect(
+    () => {
+      // const encodedPackageName = getEncodePackageName(packageName);
+      // getVersions(encodedPackageName).then(setVersions);
+      setCacheVersions();
     },
     [packageName]
   );
