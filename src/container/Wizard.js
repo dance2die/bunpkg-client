@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
@@ -77,30 +77,37 @@ function Wizard() {
   // Clearing error boundary Fallback component
   // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
+  const versionStep = useMemo(
+    () => <SelectVersionsStep packageName={packageName} />,
+    [packageName]
+  );
+  const linksStep = useMemo(
+    () => <UnpkgLinksStep packageName={packageName} version={version} />,
+    [packageName, version]
+  );
 
-  function next() {
+  function goToNextStep() {
     setCurrent(current + 1);
-  }
-  function prev() {
-    setCurrent(current - 1);
   }
 
   function setNextPackageName(packageName) {
     setPackageName(packageName);
-    next();
+    goToNextStep();
   }
 
   function setNextVersion(version) {
     setVersion(version);
-    next();
+    goToNextStep();
   }
 
   function getContent() {
     switch (current) {
       case wizardStep.selectVersions:
-        return <SelectVersionsStep packageName={packageName} />;
+        // return <SelectVersionsStep packageName={packageName} />;
+        return versionStep;
       case wizardStep.unpkgLinks:
-        return <UnpkgLinksStep packageName={packageName} version={version} />;
+        // return <UnpkgLinksStep packageName={packageName} version={version} />;
+        return linksStep;
       default:
         return <SearchPackageStep />;
     }
