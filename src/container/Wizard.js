@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
@@ -78,6 +78,7 @@ function Wizard() {
   // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
 
+  const searchStep = useMemo(() => <SearchPackageStep />, []);
   const versionStep = useMemo(
     () => <SelectVersionsStep packageName={packageName} />,
     [packageName]
@@ -85,14 +86,6 @@ function Wizard() {
   const linksStep = useMemo(
     () => <UnpkgLinksStep packageName={packageName} version={version} />,
     [packageName, version]
-  );
-
-  const refreshErrorBoundary = useCallback(
-    () => {
-      console.log(`refreshErrorBoundary current`, current);
-      setErrorBoundaryKey(errorBoundaryKey + 1);
-    },
-    [current]
   );
 
   const contextState = {
@@ -117,13 +110,12 @@ function Wizard() {
   function getContent() {
     switch (current) {
       case wizardStep.selectVersions:
-        // return <SelectVersionsStep packageName={packageName} />;
         return versionStep;
       case wizardStep.unpkgLinks:
-        // return <UnpkgLinksStep packageName={packageName} version={version} />;
         return linksStep;
       default:
-        return <SearchPackageStep />;
+        // return <SearchPackageStep />;
+        return searchStep;
     }
   }
 
@@ -135,11 +127,10 @@ function Wizard() {
     )
       return;
 
-    console.log(`BEFORE onStepClick currentStep current`, currentStep, current);
     setCurrent(currentStep);
-    console.log(`AFTER onStepClick currentStep current`, currentStep, current);
-    refreshErrorBoundary();
   }
+
+  useEffect(() => setErrorBoundaryKey(errorBoundaryKey + 1), [current]);
 
   return (
     <PackageContext.Provider value={contextState}>
