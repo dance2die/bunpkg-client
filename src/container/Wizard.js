@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
@@ -77,6 +77,7 @@ function Wizard() {
   // Clearing error boundary Fallback component
   // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
+
   const versionStep = useMemo(
     () => <SelectVersionsStep packageName={packageName} />,
     [packageName]
@@ -85,6 +86,19 @@ function Wizard() {
     () => <UnpkgLinksStep packageName={packageName} version={version} />,
     [packageName, version]
   );
+
+  const refreshErrorBoundary = useCallback(
+    () => {
+      console.log(`refreshErrorBoundary current`, current);
+      setErrorBoundaryKey(errorBoundaryKey + 1);
+    },
+    [current]
+  );
+
+  const contextState = {
+    setPackageName: setNextPackageName,
+    setVersion: setNextVersion
+  };
 
   function goToNextStep() {
     setCurrent(current + 1);
@@ -121,17 +135,14 @@ function Wizard() {
     )
       return;
 
+    console.log(`BEFORE onStepClick currentStep current`, currentStep, current);
     setCurrent(currentStep);
-    setErrorBoundaryKey(errorBoundaryKey + 1);
+    console.log(`AFTER onStepClick currentStep current`, currentStep, current);
+    refreshErrorBoundary();
   }
 
   return (
-    <PackageContext.Provider
-      value={{
-        setPackageName: setNextPackageName,
-        setVersion: setNextVersion
-      }}
-    >
+    <PackageContext.Provider value={contextState}>
       <BunpkgSuspense>
         <Steps current={current}>
           {steps.map((item, step) => (

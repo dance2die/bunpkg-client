@@ -1,8 +1,8 @@
 {
-  "name": "bunpkg",
+  "name": "bunpkg-hooks",
   "version": "1.0.0",
   "description": "Build UNPKG Links by Searching",
-  "keywords": ["unpkg", "bunpkg", "npm"],
+  "keywords": [],
   "license": "MIT",
   "main": "src/index.js",
   "homepage": "https://bunpkg.com/",
