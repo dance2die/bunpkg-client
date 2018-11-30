@@ -14,9 +14,10 @@ import AppFooter from "./components/AppFooter";
 // When published on Netlify, it'd be stripped off.
 if (process.env.NODE_ENV === "development") {
   // Make sure that the custom stylesheet overrides antd css.
-  import("antd/dist/antd.css").then(() => import("./styles.css"));
-} else {
-  import("./styles.css");
+  // import("antd/dist/antd.css").then(() => import("./styles.css"));
+  import("antd/dist/antd.css");
+  // } else {
+  //   import("./styles.css");
 }
 
 const { Content } = Layout;
