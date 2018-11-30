@@ -71,7 +71,7 @@ Object.freeze(wizardStep);
  * See {@link https://ant.design/components/steps/|Antd Steps}.
  */
 function Wizard() {
-  const [current, setCurrent] = useState(wizardStep.searchPackage);
+  const [step, setStep] = useState(wizardStep.searchPackage);
   const [packageName, setPackageName] = useState("");
   const [version, setVersion] = useState("");
   // Clearing error boundary Fallback component
@@ -94,7 +94,7 @@ function Wizard() {
   };
 
   function goToNextStep() {
-    setCurrent(current + 1);
+    setStep(step + 1);
   }
 
   function setNextPackageName(packageName) {
@@ -108,13 +108,12 @@ function Wizard() {
   }
 
   function getContent() {
-    switch (current) {
+    switch (step) {
       case wizardStep.selectVersions:
         return versionStep;
       case wizardStep.unpkgLinks:
         return linksStep;
       default:
-        // return <SearchPackageStep />;
         return searchStep;
     }
   }
@@ -127,15 +126,15 @@ function Wizard() {
     )
       return;
 
-    setCurrent(currentStep);
+    setStep(currentStep);
   }
 
-  useEffect(() => setErrorBoundaryKey(errorBoundaryKey + 1), [current]);
+  useEffect(() => setErrorBoundaryKey(errorBoundaryKey + 1), [step]);
 
   return (
     <PackageContext.Provider value={contextState}>
       <BunpkgSuspense>
-        <Steps current={current}>
+        <Steps current={step}>
           {steps.map((item, step) => (
             <Steps.Step
               className="wizard-step"
