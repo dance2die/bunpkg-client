@@ -179,24 +179,24 @@ class UnpkgLinksStep extends Component {
     if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
     return (
-      <BunpkgSuspense>
-        <div className="unpkg-links">
+      <div className="unpkg-links">
+        <BunpkgSuspense>
           <ResultHeader
             packageName={packageName}
             version={version}
             homepage={homepage}
           />
-          <Checkbox
-            onChange={this.onMinifiedFilesOnlyChange}
-            checked={minifiedFilesOnly}
-          >
-            Minified Files Only
-          </Checkbox>
-          <section>
-            <div>{this.renderFiles()}</div>
-          </section>
-        </div>
-      </BunpkgSuspense>
+        </BunpkgSuspense>
+        <Checkbox
+          onChange={this.onMinifiedFilesOnlyChange}
+          checked={minifiedFilesOnly}
+        >
+          Minified Files Only
+        </Checkbox>
+        <section>
+          <div>{this.renderFiles()}</div>
+        </section>
+      </div>
     );
   }
 }
