@@ -44,7 +44,7 @@ function SelectVersionsStep({ packageName }) {
       const encodedPackageName = getEncodePackageName(packageName);
       getVersions(encodedPackageName).then(setVersions);
     },
-    [packageName, versions]
+    [packageName]
   );
 
   function onStableVersionsOnlyChange(e) {
