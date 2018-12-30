@@ -1,27 +1,24 @@
-import React, { Component, Suspense } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
 import PackageContext from "../data/PackageContext";
-
 import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
-import SearchPackageStep from "../components/steps/SearchPackageStep";
-import SelectVersionsStep from "../components/steps/SelectVersionsStep";
-import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
+import BunpkgSuspense from "../components/BunpkgSuspense";
+import * as Events from "../components/steps";
 
-// import * as Events from "../components/steps";
-// const SearchPackageStep = Events.SearchPackageStep;
-// const SelectVersionsStep = Events.SelectVersionsStep;
-// const UnpkgLinksStep = Events.UnpkgLinksStep;
+const SearchPackageStep = Events.SearchPackageStep;
+const SelectVersionsStep = Events.SelectVersionsStep;
+const UnpkgLinksStep = Events.UnpkgLinksStep;
 
 /**
- * @todo Add filter in result to show only "minified" javascript files
  * @todo Dynamically load "SelectVersionsStep" & "UnpkgLinksStep" components to reduce size
  *  - https://www.slightedgecoder.com/2017/12/03/loading-react-components-dynamically-demand/#case3
  *  - https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#code-splitting
  * @todo Add a route to receive a param -
  *    If "package" name is passed, then go to 2nd step,
  *    If both package & version is given, go straight to 3rd step
+ * ✅ Add filter in result to show only "minified" javascript files
  * ✅ Override Create-react-app
  *  * Reduce AntD import size
  *  * Install {@link https://github.com/entwicklerstube/babel-plugin-root-import|babel-plugin-root-import} for a cleaner imports for dynamic imports
@@ -68,84 +65,83 @@ Object.freeze(wizardStep);
  * Steps required to generate Unpkdg links.
  * See {@link https://ant.design/components/steps/|Antd Steps}.
  */
-class Wizard extends Component {
-  state = {
-    current: wizardStep.searchPackage,
-    packageName: "",
-    version: "",
-    // Clearing error boundary Fallback component
-    // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
-    errorBoundaryKey: 0
+function Wizard() {
+  const [step, setStep] = useState(wizardStep.searchPackage);
+  const [packageName, setPackageName] = useState("");
+  const [version, setVersion] = useState("");
+  // Clearing error boundary Fallback component
+  // Refer to https://github.com/bvaughn/react-error-boundary/issues/23#issuecomment-425470511
+  const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
+
+  const searchStep = useMemo(() => <SearchPackageStep />, []);
+  const versionStep = useMemo(() => <SelectVersionsStep packageName={packageName} />, [
+    packageName
+  ]);
+  const linksStep = useMemo(() => <UnpkgLinksStep packageName={packageName} version={version} />, [
+    packageName,
+    version
+  ]);
+
+  const contextState = {
+    setPackageName: setNextPackageName,
+    setVersion: setNextVersion
   };
 
-  next = () => this.setState(prevState => ({ current: prevState.current + 1 }));
-  prev = () => this.setState(prevState => ({ current: prevState.current - 1 }));
-
-  setPackageName = packageName => this.setState({ packageName }, this.next);
-  setVersion = version => this.setState({ version }, this.next);
-
-  getContent = () => {
-    const { current, packageName, version } = this.state;
-
-    switch (current) {
-      default:
-        return <SearchPackageStep />;
-      case wizardStep.selectVersions:
-        return <SelectVersionsStep packageName={packageName} />;
-      case wizardStep.unpkgLinks:
-        return <UnpkgLinksStep packageName={packageName} version={version} />;
-    }
-  };
-
-  onStepClick = current => {
-    const { packageName, version } = this.state;
-
-    if (current === wizardStep.selectVersions && packageName === "") return;
-    if (
-      current === wizardStep.unpkgLinks &&
-      (packageName === "" || version === "")
-    )
-      return;
-
-    this.setState(prevState => ({
-      current,
-      errorBoundaryKey: prevState.errorBoundaryKey + 1
-    }));
-  };
-
-  render() {
-    const { current, errorBoundaryKey } = this.state;
-
-    return (
-      <PackageContext.Provider
-        value={{
-          setPackageName: this.setPackageName,
-          setVersion: this.setVersion
-        }}
-      >
-        <Suspense fallback={<div>Loading steps...</div>}>
-          <Steps current={current}>
-            {steps.map((item, step) => (
-              <Steps.Step
-                className="wizard-step"
-                key={item.title}
-                title={item.title}
-                onClick={e => this.onStepClick(step)}
-              />
-            ))}
-          </Steps>
-          <div className="steps-content">
-            <ErrorBoundary
-              key={errorBoundaryKey}
-              FallbackComponent={ErrorFallbackComponent}
-            >
-              {this.getContent()}
-            </ErrorBoundary>
-          </div>
-        </Suspense>
-      </PackageContext.Provider>
-    );
+  function goToNextStep() {
+    setStep(step + 1);
   }
+
+  function setNextPackageName(packageName) {
+    setPackageName(packageName);
+    goToNextStep();
+  }
+
+  function setNextVersion(version) {
+    setVersion(version);
+    goToNextStep();
+  }
+
+  function getContent() {
+    switch (step) {
+      case wizardStep.selectVersions:
+        return versionStep;
+      case wizardStep.unpkgLinks:
+        return linksStep;
+      default:
+        return searchStep;
+    }
+  }
+
+  function onStepClick(currentStep) {
+    if (currentStep === wizardStep.selectVersions && packageName === "") return;
+    if (currentStep === wizardStep.unpkgLinks && (packageName === "" || version === "")) return;
+
+    setStep(currentStep);
+  }
+
+  useEffect(() => setErrorBoundaryKey(errorBoundaryKey + 1), [step]);
+
+  return (
+    <PackageContext.Provider value={contextState}>
+      <Steps current={step}>
+        {steps.map((item, step) => (
+          <Steps.Step
+            className="wizard-step"
+            key={item.title}
+            title={item.title}
+            onClick={e => onStepClick(step)}
+          />
+        ))}
+      </Steps>
+      <div className="steps-content">
+        <BunpkgSuspense>
+          <ErrorBoundary key={errorBoundaryKey} FallbackComponent={ErrorFallbackComponent}>
+            {getContent()}
+          </ErrorBoundary>
+        </BunpkgSuspense>
+      </div>
+    </PackageContext.Provider>
+  );
 }
 
 export default Wizard;

@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-125646555-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125646555-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-125646555-1');
-
-  </script>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="theme-color" content="#000000">
-	<meta name="Description" content="Build UNPKG Links with ease.">
-	<!--
+      gtag("config", "UA-125646555-1");
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="Description" content="Build UNPKG Links with ease." />
+    <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-	<!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
-	<title>🍔 Bunpkg - B{uild}unpkg{URL}</title>
-</head>
+    <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json"> -->
+    <title>🍔 Bunpkg - B{uild}unpkg{URL}</title>
+  </head>
 
-<body>
-	<noscript>
-		You need to enable JavaScript to run this app.
-	</noscript>
-	<div id="root"></div>
-	<link async defer rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lily+Script+One&text=Bunpkg">
-	<link async defer rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-</body>
-
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <div id="root"></div>
+    <link
+      async
+      defer
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lily+Script+One&text=Bunpkg"
+    />
+    <link async defer rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+  </body>
 </html>

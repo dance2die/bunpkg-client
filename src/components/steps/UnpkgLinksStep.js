@@ -1,19 +1,20 @@
-import React, { Component } from "react";
+import React, { lazy, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { List, Spin, Button, message, Checkbox } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import { ExternalLink } from "../Links";
 import { getPackageInfo } from "../../data/SearchRepository";
+import BunpkgSuspense from "./../BunpkgSuspense";
 
 import {
   buildUnpkgURL,
   buildUnpkgDirectoryURL,
-  buildUnpkgScriptTag,
   buildUnpkgLinkTag,
   buildBundlePhobiaURL,
   isEmpty
 } from "../../util/index";
+
+const ExternalLink = lazy(() => import("./../ExternalLink"));
 
 const CopyButton = ({ clipboardText, buttonText }) => (
   <CopyToClipboard
@@ -63,57 +64,42 @@ const ResultHeader = ({ packageName, version, homepage }) => {
   );
 };
 
-class UnpkgLinksStep extends Component {
-  static propTypes = {
-    packageName: PropTypes.string.isRequired,
-    version: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  };
+function UnpkgLinksStep({ packageName, version }) {
+  const [meta, setMeta] = useState({});
+  const [files, setFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [minifiedFilesOnly, setMinifiedFilesOnly] = useState(true);
 
-  state = {
-    meta: {},
-    files: [],
-    isLoading: false,
-    minifiedFilesOnly: true
-  };
-
-  componentDidMount() {
-    const { packageName, version } = this.props;
+  useEffect(() => {
     getPackageInfo(packageName, version)
-      .then(({ meta, files }) =>
-        this.setState({ meta, files, isLoading: false })
-      )
+      .then(({ meta, files }) => {
+        setMeta(meta);
+        setFiles(files);
+      })
       .catch(error => {
-        this.setState({ isLoading: false }, () => {
-          // bubble up to let the error boundary in the Wizard to display the error
-          throw new Error(error);
-        });
-      });
-  }
+        // bubble up to let the error boundary in the Wizard to display the error
+        throw new Error(error);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
-  renderMainCopyButton = (packageName, version, file) => {
+  const renderMainCopyButton = (packageName, version, file) => {
     if (file.endsWith(".map")) return null;
 
-    return file.endsWith(".css") ? (
+    return (
       <CopyButton
         clipboardText={buildUnpkgLinkTag(packageName, version, file)}
-        buttonText="Copy Link"
-      />
-    ) : (
-      <CopyButton
-        clipboardText={buildUnpkgScriptTag(packageName, version, file)}
-        buttonText="Copy Script"
+        buttonText={file.endsWith(".css") ? "Copy Link" : "Copy Script"}
       />
     );
   };
 
-  renderListItem = file => {
-    const { packageName, version } = this.props;
-
+  const renderListItem = file => {
     return (
       <List.Item
         key={file}
         actions={[
-          this.renderMainCopyButton(packageName, version, file),
+          renderMainCopyButton(packageName, version, file),
           <CopyButton
             clipboardText={buildUnpkgURL(packageName, version, file)}
             buttonText="Copy Unpkg"
@@ -123,10 +109,7 @@ class UnpkgLinksStep extends Component {
         <List.Item.Meta
           description={
             <strong>
-              <a
-                href={buildUnpkgURL(packageName, version, file)}
-                target="_blank"
-              >
+              <a href={buildUnpkgURL(packageName, version, file)} target="_blank">
                 {file}
               </a>
             </strong>
@@ -136,25 +119,16 @@ class UnpkgLinksStep extends Component {
     );
   };
 
-  renderFiles = () => {
-    const { meta, files, isLoading, minifiedFilesOnly } = this.state;
+  const renderFiles = () => {
     const byMinifiedFiles = file => !!file.match(/.min./gi);
-    const filteredFiles = minifiedFilesOnly
-      ? files.filter(byMinifiedFiles)
-      : files;
+    const filteredFiles = minifiedFilesOnly ? files.filter(byMinifiedFiles) : files;
 
     if (isEmpty(meta)) return <Spin />;
     if (filteredFiles.length <= 0)
-      return (
-        <p className="no-min-files-message">No Minified Files Available</p>
-      );
+      return <p className="no-min-files-message">No Minified Files Available</p>;
 
     return (
-      <List
-        className="result-list"
-        dataSource={filteredFiles}
-        renderItem={this.renderListItem}
-      >
+      <List className="result-list" dataSource={filteredFiles} renderItem={renderListItem}>
         {isLoading && (
           <div className="demo-loading-container">
             <Spin />
@@ -164,35 +138,31 @@ class UnpkgLinksStep extends Component {
     );
   };
 
-  onMinifiedFilesOnlyChange = e => {
-    this.setState({ minifiedFilesOnly: e.target.checked });
+  const onMinifiedFilesOnlyChange = e => {
+    setMinifiedFilesOnly(e.target.checked);
   };
 
-  render() {
-    const { packageName, version } = this.props;
-    const { meta, files, minifiedFilesOnly } = this.state;
-    const { homepage } = meta;
-    if (isEmpty(meta) || files.length <= 0) return <Spin />;
+  const { homepage } = meta;
+  if (isEmpty(meta) || files.length <= 0) return <Spin />;
 
-    return (
-      <div className="unpkg-links">
-        <ResultHeader
-          packageName={packageName}
-          version={version}
-          homepage={homepage}
-        />
-        <Checkbox
-          onChange={this.onMinifiedFilesOnlyChange}
-          checked={minifiedFilesOnly}
-        >
-          Minified Files Only
-        </Checkbox>
-        <section>
-          <div>{this.renderFiles()}</div>
-        </section>
-      </div>
-    );
-  }
+  return (
+    <div className="unpkg-links">
+      <BunpkgSuspense>
+        <ResultHeader packageName={packageName} version={version} homepage={homepage} />
+      </BunpkgSuspense>
+      <Checkbox onChange={onMinifiedFilesOnlyChange} checked={minifiedFilesOnly}>
+        Minified Files Only
+      </Checkbox>
+      <section>
+        <div>{renderFiles()}</div>
+      </section>
+    </div>
+  );
 }
+
+UnpkgLinksStep.propTypes = {
+  packageName: PropTypes.string.isRequired,
+  version: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 export default UnpkgLinksStep;
