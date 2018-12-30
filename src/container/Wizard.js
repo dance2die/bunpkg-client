@@ -1,17 +1,12 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Steps } from "antd";
 import ErrorBoundary from "react-error-boundary";
 
 import PackageContext from "../data/PackageContext";
-
 import ErrorFallbackComponent from "../components/ErrorFallbackComponent";
-// import SearchPackageStep from "../components/steps/SearchPackageStep";
-// import SelectVersionsStep from "../components/steps/SelectVersionsStep";
-// import UnpkgLinksStep from "../components/steps/UnpkgLinksStep";
-
 import BunpkgSuspense from "../components/BunpkgSuspense";
-
 import * as Events from "../components/steps";
+
 const SearchPackageStep = Events.SearchPackageStep;
 const SelectVersionsStep = Events.SelectVersionsStep;
 const UnpkgLinksStep = Events.UnpkgLinksStep;
@@ -79,14 +74,13 @@ function Wizard() {
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
 
   const searchStep = useMemo(() => <SearchPackageStep />, []);
-  const versionStep = useMemo(
-    () => <SelectVersionsStep packageName={packageName} />,
-    [packageName]
-  );
-  const linksStep = useMemo(
-    () => <UnpkgLinksStep packageName={packageName} version={version} />,
-    [packageName, version]
-  );
+  const versionStep = useMemo(() => <SelectVersionsStep packageName={packageName} />, [
+    packageName
+  ]);
+  const linksStep = useMemo(() => <UnpkgLinksStep packageName={packageName} version={version} />, [
+    packageName,
+    version
+  ]);
 
   const contextState = {
     setPackageName: setNextPackageName,
@@ -120,11 +114,7 @@ function Wizard() {
 
   function onStepClick(currentStep) {
     if (currentStep === wizardStep.selectVersions && packageName === "") return;
-    if (
-      currentStep === wizardStep.unpkgLinks &&
-      (packageName === "" || version === "")
-    )
-      return;
+    if (currentStep === wizardStep.unpkgLinks && (packageName === "" || version === "")) return;
 
     setStep(currentStep);
   }
@@ -145,10 +135,7 @@ function Wizard() {
       </Steps>
       <div className="steps-content">
         <BunpkgSuspense>
-          <ErrorBoundary
-            key={errorBoundaryKey}
-            FallbackComponent={ErrorFallbackComponent}
-          >
+          <ErrorBoundary key={errorBoundaryKey} FallbackComponent={ErrorFallbackComponent}>
             {getContent()}
           </ErrorBoundary>
         </BunpkgSuspense>
