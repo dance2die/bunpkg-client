@@ -91,7 +91,7 @@
 }
 
 .select-versions {
-  padding-top: 2em;
+  /* padding-top: 2em; */
 }
 
 .steps-content a {
@@ -103,7 +103,7 @@
 }
 
 .ant-list-split {
-  margin: 2.5em auto;
+  margin: 1em auto;
   overflow: auto;
 }
 

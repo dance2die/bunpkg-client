@@ -12,6 +12,11 @@ const VersionSpinnerContainer = styled.div`
   margin: 3em 0;
 `;
 
+const PackageName = styled.div`
+  font-size: 2.5rem;
+  margin-bottom: 0.4em;
+`;
+
 function Version({ version }) {
   const { setVersion } = useContext(PackageContext);
 
@@ -68,6 +73,7 @@ function SelectVersionsStep({ packageName }) {
 
   return (
     <div className="select-versions">
+      <PackageName>{packageName}</PackageName>
       <Checkbox
         onChange={onStableVersionsOnlyChange}
         checked={stableVersionsOnly}
