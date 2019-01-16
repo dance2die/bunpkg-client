@@ -10,6 +10,7 @@ import {
   buildUnpkgURL,
   buildUnpkgDirectoryURL,
   buildUnpkgLinkTag,
+  buildUnpkgScriptTag,
   buildBundlePhobiaURL,
   isEmpty
 } from "../../util/index";
@@ -86,10 +87,15 @@ function UnpkgLinksStep({ packageName, version }) {
   const renderMainCopyButton = (packageName, version, file) => {
     if (file.endsWith(".map")) return null;
 
-    return (
+    return file.endsWith(".css") ? (
       <CopyButton
         clipboardText={buildUnpkgLinkTag(packageName, version, file)}
-        buttonText={file.endsWith(".css") ? "Copy Link" : "Copy Script"}
+        buttonText={"Copy Link"}
+      />
+    ) : (
+      <CopyButton
+        clipboardText={buildUnpkgScriptTag(packageName, version, file)}
+        buttonText={"Copy Script"}
       />
     );
   };
@@ -109,7 +115,10 @@ function UnpkgLinksStep({ packageName, version }) {
         <List.Item.Meta
           description={
             <strong>
-              <a href={buildUnpkgURL(packageName, version, file)} target="_blank">
+              <a
+                href={buildUnpkgURL(packageName, version, file)}
+                target="_blank"
+              >
                 {file}
               </a>
             </strong>
@@ -121,14 +130,22 @@ function UnpkgLinksStep({ packageName, version }) {
 
   const renderFiles = () => {
     const byMinifiedFiles = file => !!file.match(/.min./gi);
-    const filteredFiles = minifiedFilesOnly ? files.filter(byMinifiedFiles) : files;
+    const filteredFiles = minifiedFilesOnly
+      ? files.filter(byMinifiedFiles)
+      : files;
 
     if (isEmpty(meta)) return <Spin />;
     if (filteredFiles.length <= 0)
-      return <p className="no-min-files-message">No Minified Files Available</p>;
+      return (
+        <p className="no-min-files-message">No Minified Files Available</p>
+      );
 
     return (
-      <List className="result-list" dataSource={filteredFiles} renderItem={renderListItem}>
+      <List
+        className="result-list"
+        dataSource={filteredFiles}
+        renderItem={renderListItem}
+      >
         {isLoading && (
           <div className="demo-loading-container">
             <Spin />
@@ -148,9 +165,16 @@ function UnpkgLinksStep({ packageName, version }) {
   return (
     <div className="unpkg-links">
       <BunpkgSuspense>
-        <ResultHeader packageName={packageName} version={version} homepage={homepage} />
+        <ResultHeader
+          packageName={packageName}
+          version={version}
+          homepage={homepage}
+        />
       </BunpkgSuspense>
-      <Checkbox onChange={onMinifiedFilesOnlyChange} checked={minifiedFilesOnly}>
+      <Checkbox
+        onChange={onMinifiedFilesOnlyChange}
+        checked={minifiedFilesOnly}
+      >
         Minified Files Only
       </Checkbox>
       <section>
