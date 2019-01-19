@@ -49,7 +49,7 @@ const isScopedPakcge = packageName => packageName.charAt(0) === "@";
 const getPackageInfo = (packageName, version) =>
   axios
     .get(
-      `https://bunpkg.herokuapp.com/api/info/${encodePackageName(
+      `https://bunpkg.herokuapp.com/api/info/${getEncodePackageName(
         packageName
       )}/${version}`
     )
