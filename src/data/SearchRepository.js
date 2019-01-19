@@ -1,6 +1,8 @@
 import axios from "axios";
 import semverSort from "semver-sort";
 
+import { getEncodePackageName } from "../util/index";
+
 // Credit to BundlePhobia by Shubham Kanodia
 // https://github.com/pastelsky/bundlephobia/blob/59d865c01c9232b689b0ea3a3f4e4d655adff063/client/api.js#L53
 const suggestionSort = (packageA, packageB) => {
@@ -33,19 +35,16 @@ const getSuggestions = query =>
 
 const getVersions = packageName =>
   axios
-    .get(`https://bunpkg.herokuapp.com/api/versions/${packageName}`)
+    .get(
+      `https://bunpkg.herokuapp.com/api/versions/${getEncodePackageName(
+        packageName
+      )}`
+    )
     .then(filterByData)
     .then(semverSort.desc)
     .catch(error => error);
 
 const isScopedPakcge = packageName => packageName.charAt(0) === "@";
-
-// Refer to Michael Jackson's UNPKG source
-// https://github.com/unpkg/unpkg.com/blob/82d404a973cfe24a2a632859cbb6ab8958d48e9e/modules/utils/fetchNpmPackageInfo.js#L15
-const encodePackageName = packageName =>
-  isScopedPakcge(packageName)
-    ? `@${encodeURIComponent(packageName.substring(1))}`
-    : encodeURIComponent(packageName);
 
 const getPackageInfo = (packageName, version) =>
   axios

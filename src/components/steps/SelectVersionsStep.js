@@ -1,12 +1,20 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, {
+  Suspense,
+  useState,
+  useCallback,
+  useEffect,
+  useContext
+} from "react";
+
 import { List, Spin, Checkbox } from "antd";
 import stable from "semver-stable";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { getEncodePackageName } from "../../util/index";
 import { getVersions } from "../../data/SearchRepository";
 import PackageContext from "../../data/PackageContext";
+import { createResource } from "../../util/createResource";
+import BunpkgSuspense from "../BunpkgSuspense";
 
 const VersionSpinnerContainer = styled.div`
   margin: 3em 0;
@@ -35,23 +43,44 @@ function renderListItem(version) {
   return <Version version={version} />;
 }
 
+const VersionsResource = createResource(packageName => {
+  const versions = getVersions(packageName);
+  console.log(`VersionsResource.versions`, versions);
+  return versions;
+});
+
+// function useVersions(packageName, stableVersionsOnly = true) {
+//   const initialVersions = VersionsResource.read(packageName);
+//   const [versions, setVersions] = useState(initialVersions);
+
+//   function showStableVersionsOnly(yes) {
+//     setVersions(yes ? versions.filter(stable.is) : versions);
+//   }
+
+//   useEffect(() => showStableVersionsOnly(stableVersionsOnly), [
+//     stableVersionsOnly
+//   ]);
+
+//   return { versions, showStableVersionsOnly };
+// }
+
 function SelectVersionsStep({ packageName }) {
   const defaultVersions = [];
   const defaultStableVersionsOnly = true;
 
-  const [versions, setVersions] = useState(defaultVersions);
   const [stableVersionsOnly, setStableVersionsOnly] = useState(
     defaultStableVersionsOnly
   );
 
+  const [versions, setVersions] = useState(defaultVersions);
+  // const { versions, showStableVersionsOnly } = useVersions(packageName);
+
   const setCacheVersions = useCallback(
     () => {
-      const encodedPackageName = getEncodePackageName(packageName);
-      getVersions(encodedPackageName).then(setVersions);
+      getVersions(packageName).then(setVersions);
     },
-    [packageName, setVersions]
+    [packageName]
   );
-
   useEffect(
     () => {
       // const encodedPackageName = getEncodePackageName(packageName);
@@ -62,13 +91,16 @@ function SelectVersionsStep({ packageName }) {
   );
 
   function onStableVersionsOnlyChange(e) {
-    setStableVersionsOnly(e.target.checked);
+    const { checked } = e.target;
+    setStableVersionsOnly(checked);
+    showStableVersionsOnly(checked);
   }
 
   function filteredVersions() {
     return stableVersionsOnly ? versions.filter(stable.is) : versions;
   }
 
+  console.log(`versions`, versions);
   if (!Array.isArray(versions)) throw new Error(versions);
 
   return (
@@ -80,13 +112,15 @@ function SelectVersionsStep({ packageName }) {
       >
         Stable Versions Only
       </Checkbox>
-      {versions.length === 0 ? (
-        <VersionSpinnerContainer>
-          <Spin />
-        </VersionSpinnerContainer>
-      ) : (
-        <List dataSource={filteredVersions()} renderItem={renderListItem} />
-      )}
+      <BunpkgSuspense>
+        {versions.length === 0 ? (
+          <VersionSpinnerContainer>
+            <Spin />
+          </VersionSpinnerContainer>
+        ) : (
+          <List dataSource={versions} renderItem={renderListItem} />
+        )}
+      </BunpkgSuspense>
     </div>
   );
 }
