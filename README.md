@@ -1,4 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/75669d62-e1fe-4137-9bf9-a6314260fbdc/deploy-status)](https://app.netlify.com/sites/bunpkg/deploys)
+[![Known Vulnerabilities](https://snyk.io/test/github/dance2die/bunpkg-client/badge.svg?targetFile=package.json)](https://snyk.io/test/github/dance2die/bunpkg-client?targetFile=package.json)
 
 # What?
 
