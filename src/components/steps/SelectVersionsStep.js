@@ -4,7 +4,7 @@ import React, {
   useCallback,
   useMemo,
   useEffect,
-  useContext
+  useContext,
 } from "react";
 
 import { List, Spin, Checkbox } from "antd";
@@ -66,19 +66,13 @@ function useVersions(packageName, stableVersionsOnly = true) {
     setVersions(yes ? versions.filter(stable.is) : versions);
   }
 
-  useEffect(
-    () => {
-      getVersions(packageName).then(setVersions);
-    },
-    [packageName]
-  );
+  useEffect(() => {
+    getVersions(packageName).then(setVersions);
+  }, [packageName]);
 
-  useEffect(
-    () => {
-      showStableVersionsOnly(stableVersionsOnly);
-    },
-    [stableVersionsOnly]
-  );
+  useEffect(() => {
+    showStableVersionsOnly(stableVersionsOnly);
+  }, [stableVersionsOnly]);
 
   const versionsCache = useMemo(() => versions, [versions]);
   // console.log(`versions, versionsCache`, versions, versionsCache);
@@ -146,7 +140,7 @@ function SelectVersionsStep({ packageName }) {
     return stableVersionsOnly ? versions.filter(stable.is) : versions;
   }
 
-  // console.log(`versions`, versions);
+  console.log(`versions`, versions);
   if (!Array.isArray(versions)) throw new Error(versions);
 
   return (
@@ -174,7 +168,7 @@ function SelectVersionsStep({ packageName }) {
 }
 
 SelectVersionsStep.propTypes = {
-  packageName: PropTypes.string.isRequired
+  packageName: PropTypes.string.isRequired,
 };
 
 export default SelectVersionsStep;
