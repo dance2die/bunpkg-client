@@ -15,7 +15,9 @@ import AppFooter from "./components/AppFooter";
 if (process.env.NODE_ENV === "development") {
   // Make sure that the custom stylesheet overrides antd css.
   // import("antd/dist/antd.css").then(() => import("./styles.css"));
-  import("antd/dist/antd.css");
+  (async function() {
+    await import("antd/dist/antd.css");
+  })();
   // } else {
   //   import("./styles.css");
 }
@@ -26,7 +28,7 @@ const dimension = {
   xs: 20,
   md: 20,
   lg: 20,
-  offset: 2
+  offset: 2,
 };
 
 const Column = ({ children }) => (
